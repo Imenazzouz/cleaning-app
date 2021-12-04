@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:myapp/constant.dart';
 import 'package:myapp/signup.dart';
 
-
 class Signin extends StatelessWidget {
   const Signin({Key? key}) : super(key: key);
 
@@ -13,127 +12,134 @@ class Signin extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Stack(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                color: blue,
-              ),
-              const TopSginin(),
-              Positioned(
-                top: MediaQuery.of(context).size.height * 0.07,
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.9,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      color: whiteshade,
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(45),
-                          topRight: Radius.circular(45))),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: blue,
+          ),
+          const TopSginin(),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.07,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.9,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  color: whiteshade,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(45),
+                      topRight: Radius.circular(45))),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 180,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.09),
+                    child: Image.asset("assets/h.jpg"),
+                  ),
+                  Container(
+                      child: InputField(
+                    headerText: "Username",
+                    hintTexti: "Username",
+                  )),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  // InputField(
+                  //   headerText: "Email",
+                  //   hintTexti: "aaa@example.com",
+                  //   visible: false,
+                  // ),
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
+                  InputFieldPassword(
+                      headerText: "Password",
+                      hintTexti: "At least 8 Charecter"),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      const CheckerBox(),
                       Container(
-                        height: 180,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.09),
-                        child: Image.asset("assets/h.jpg"),
-                      ),
-                      Container(
-
-                          child: InputField(headerText: "Username", hintTexti: "Username", )
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      // InputField(
-                      //   headerText: "Email",
-                      //   hintTexti: "aaa@example.com",
-                      //   visible: false,
-                      // ),
-                      // const SizedBox(
-                      //   height: 10,
-                      // ),
-                      InputFieldPassword(
-                          headerText: "Password",
-                          hintTexti: "At least 8 Charecter"),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const CheckerBox(),
-                          Container(
-                            margin: EdgeInsets.only(right: 20),
-                            child: InkWell(
-                              onTap: () {},
-                              child: Text(
-                                "Forgot Password?",
-                                style: TextStyle(
-                                  fontFamily: 'poppins',
-                                    color: blue.withOpacity(0.7),
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
+                        margin: EdgeInsets.only(right: 20),
+                        child: InkWell(
+                          onTap: () {},
+                          child: Text(
+                            "Forgot Password?",
+                            style: TextStyle(
+                                fontFamily: 'poppins',
+                                color: blue.withOpacity(0.7),
+                                fontWeight: FontWeight.w600),
                           ),
-                        ],
-                      ),
-                      InkWell(
-                        onTap: () {
-                          print("Sign up click");
-                          Navigator.pushNamed(context, '/page1');
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.07,
-                          margin: const EdgeInsets.only(left: 20, right: 20),
-                          decoration: BoxDecoration(
-                              color: blue,
-                              borderRadius:
-                              const BorderRadius.all(Radius.circular(30))),
-                          child: Center(
-                            child: Text(
-                              "Sign in",
-                              style: TextStyle(
-                                  color: whiteshade, fontSize: 20,fontFamily: 'poppins', fontWeight: FontWeight.w600,letterSpacing: 1
-
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.149,
-                            top: MediaQuery.of(context).size.height * 0.08),
-                        child: Text.rich(
-                          TextSpan(
-                              text: "Don't already Have an account? ",
-                              style: TextStyle(
-                                  letterSpacing: 0.7,
-                                  fontFamily: 'poppins',
-                                  color: blackshade, fontSize: 12),
-                              children: [
-                                TextSpan(
-                                    text: "Sign Up",
-                                    style: TextStyle(color: blue, fontSize: 16 ,fontFamily: 'poppins'),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => SignUp()));
-                                        print("Sign Up click");
-                                      }),
-                              ]),
                         ),
                       ),
                     ],
                   ),
-                ),
+                  InkWell(
+                    onTap: () {
+                      print("Sign up click");
+                      Navigator.pushNamed(context, '/page1');
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      margin: const EdgeInsets.only(left: 20, right: 20),
+                      decoration: BoxDecoration(
+                          color: blue,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30))),
+                      child: Center(
+                        child: Text(
+                          "Sign in",
+                          style: TextStyle(
+                              color: whiteshade,
+                              fontSize: 20,
+                              fontFamily: 'poppins',
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.149,
+                        top: MediaQuery.of(context).size.height * 0.08),
+                    child: Text.rich(
+                      TextSpan(
+                          text: "Don't already Have an account? ",
+                          style: TextStyle(
+                              letterSpacing: 0.7,
+                              fontFamily: 'poppins',
+                              color: blackshade,
+                              fontSize: 12),
+                          children: [
+                            TextSpan(
+                                text: "Sign Up",
+                                style: TextStyle(
+                                    color: blue,
+                                    fontSize: 16,
+                                    fontFamily: 'poppins'),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => SignUp()));
+                                    print("Sign Up click");
+                                  }),
+                          ]),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          )),
+            ),
+          ),
+        ],
+      )),
     );
   }
 }
@@ -164,7 +170,6 @@ class _CheckerBoxState extends State<CheckerBox> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Checkbox(
-
               value: isCheck,
               checkColor: whiteshade, // color of tick Mark
               activeColor: blue,
@@ -177,7 +182,8 @@ class _CheckerBoxState extends State<CheckerBox> {
           Text.rich(
             TextSpan(
               text: "Remember me",
-              style: TextStyle(color: blackshade, fontSize: 16, fontFamily: 'poppins'),
+              style: TextStyle(
+                  color: blackshade, fontSize: 16, fontFamily: 'poppins'),
             ),
           ),
         ],
@@ -207,9 +213,11 @@ class InputField extends StatelessWidget {
           child: Text(
             headerText,
             style: const TextStyle(
-                 color: Colors.blueAccent,
+                color: Colors.blueAccent,
                 letterSpacing: 0.7,
-                fontFamily: 'poppins', fontSize: 16, fontWeight: FontWeight.w600),
+                fontFamily: 'poppins',
+                fontSize: 16,
+                fontWeight: FontWeight.w600),
           ),
         ),
         Container(
@@ -230,9 +238,9 @@ class InputField extends StatelessWidget {
                 ),
               ),
             )
-          //IntrinsicHeight
+            //IntrinsicHeight
 
-        ),
+            ),
       ],
     );
   }
@@ -269,7 +277,9 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
             style: const TextStyle(
                 color: Colors.blueAccent,
                 letterSpacing: 0.7,
-                fontFamily: 'poppins', fontSize: 16, fontWeight: FontWeight.w600),
+                fontFamily: 'poppins',
+                fontSize: 16,
+                fontWeight: FontWeight.w600),
           ),
         ),
         Container(
@@ -292,7 +302,6 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
                       icon: Icon(
                           _visible ? Icons.visibility : Icons.visibility_off),
                       onPressed: () {
-
                         setState(() {
                           _visible = !_visible;
                         });
@@ -312,8 +321,8 @@ class TopSginin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Container(
-
       margin: const EdgeInsets.only(top: 15, left: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -323,22 +332,21 @@ class TopSginin extends StatelessWidget {
             Icons.arrow_back_sharp,
             color: whiteshade,
             size: 25,
-
           ),
-          const SizedBox(
-            width: 90,
+          SizedBox(
+            width: screenSize.width * 0.28,
           ),
           Text(
             "Sign In",
-            style: TextStyle(color: Colors.white, fontSize: 20,fontFamily: 'poppins', fontWeight: FontWeight.w600,letterSpacing: 1),
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontFamily: 'poppins',
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1),
           )
         ],
       ),
     );
-
-
   }
 }
-
-
-
