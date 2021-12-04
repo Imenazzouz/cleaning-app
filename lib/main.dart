@@ -11,6 +11,7 @@ import 'package:myapp/pay.dart';
 import 'package:myapp/signin.dart';
 import 'package:myapp/signup.dart';
 import 'package:myapp/splash.dart';
+import 'package:myapp/Location.dart';
 
 void main() => runApp(MyApp());
 
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         '/company': (context) => Company(),
         '/page1': (context) => Page1(),
         '/pay': (context) => Pay(),
+        '/location': (context) => Location(),
       },
     );
   }
