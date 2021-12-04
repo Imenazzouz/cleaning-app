@@ -196,7 +196,9 @@ class _LocationState extends State<Location> {
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.blueAccent),
                   child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/pay');
+                    },
                     child: Text('Confirm Order'),
                   ),
                 ),
