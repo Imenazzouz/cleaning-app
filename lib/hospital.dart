@@ -461,7 +461,7 @@ class _ServicePickState extends State<ServicePick> {
                         color: Colors.blue,
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/pay');
+                        Navigator.pushNamed(context, '/location');
                       },
                     )
                   ],
