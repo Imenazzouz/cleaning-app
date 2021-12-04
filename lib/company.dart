@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 class Company extends StatefulWidget {
   const Company({Key? key}) : super(key: key);
 
@@ -10,8 +11,11 @@ class Company extends StatefulWidget {
 class _CompanyState extends State<Company> {
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Container(
+        height: screenSize.height,
         child: ServicePick(),
       ),
       bottomNavigationBar: Bottombar(),
@@ -21,14 +25,12 @@ class _CompanyState extends State<Company> {
 
 class Bottombar extends StatefulWidget {
   const Bottombar({Key? key}) : super(key: key);
-
   @override
   _BottombarState createState() => _BottombarState();
 }
 
 class _BottombarState extends State<Bottombar> {
   int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,9 +39,12 @@ class _BottombarState extends State<Bottombar> {
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(30), topLeft: Radius.circular(30)),
           boxShadow: [
-            BoxShadow(color: Colors.white, spreadRadius: 15, blurRadius: 9,)
+            BoxShadow(
+              color: Colors.white,
+              spreadRadius: 15,
+              blurRadius: 9,
+            )
           ],
-
         ),
         child: ClipRRect(
           borderRadius: const BorderRadius.only(
@@ -56,7 +61,7 @@ class _BottombarState extends State<Bottombar> {
               size: 40,
             ),
             unselectedIconTheme:
-            const IconThemeData(color: Colors.white, size: 35),
+                const IconThemeData(color: Colors.white, size: 35),
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.history),
@@ -98,6 +103,289 @@ class _ServicePickState extends State<ServicePick> {
   bool _hasBeenPressedStaff = false;
 
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+    Column ServiceType(
+        image1, image2, image3, image4, name1, name2, name3, name4) {
+      return Column(
+        children: <Widget>[
+          FlatButton(
+            child: Container(
+              width: screenSize.width,
+              child: Row(
+                children: [
+                  Container(
+                    width: screenSize.width * 0.4,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          'images/$image1.png',
+                          width: screenSize.height * 0.08,
+                          height: screenSize.height * 0.08,
+                        ),
+                        Text(
+                          '$name1',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                              fontFamily: 'Poppins'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: screenSize.width * 0.4),
+                  Icon(
+                      _hasBeenPressedLH
+                          ? Icons.check_circle_rounded
+                          : Icons.check_circle_outline_rounded,
+                      color: _hasBeenPressedLH ? Colors.green : Colors.blueGrey)
+                ],
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.blue[100],
+                  border: Border.all(color: Colors.blue)),
+            ),
+            onPressed: () {
+              setState(() {
+                _hasBeenPressedLH = !_hasBeenPressedLH;
+              });
+            },
+          ),
+          SizedBox(
+            height: screenSize.height * 0.02,
+          ),
+          FlatButton(
+            child: Container(
+              child: Row(
+                children: [
+                  Container(
+                    width: screenSize.width * 0.4,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          'images/$image2.png',
+                          width: screenSize.height * 0.08,
+                          height: screenSize.height * 0.08,
+                        ),
+                        Text(
+                          '$name2',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                              fontFamily: 'Poppins'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: screenSize.width * 0.4),
+                  Icon(
+                      _hasBeenPressedWind
+                          ? Icons.check_circle_rounded
+                          : Icons.check_circle_outline_rounded,
+                      color:
+                          _hasBeenPressedWind ? Colors.green : Colors.blueGrey)
+                ],
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.blue[100],
+                  border: Border.all(color: Colors.blue)),
+            ),
+            onPressed: () {
+              setState(() {
+                _hasBeenPressedWind = !_hasBeenPressedWind;
+              });
+            },
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          FlatButton(
+            child: Container(
+              child: Row(
+                children: [
+                  Container(
+                    width: screenSize.width * 0.4,
+                    child: Row(
+                      children: [
+                        Container(
+                          width: screenSize.width * 0.35,
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'images/$image3.png',
+                                width: screenSize.height * 0.08,
+                                height: screenSize.height * 0.08,
+                              ),
+                              Text(
+                                '$name3',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    fontFamily: 'Poppins'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: screenSize.width * 0.4),
+                  Icon(
+                      _hasBeenPressedFloor
+                          ? Icons.check_circle_rounded
+                          : Icons.check_circle_outline_rounded,
+                      color:
+                          _hasBeenPressedFloor ? Colors.green : Colors.blueGrey)
+                ],
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.blue[100],
+                  border: Border.all(color: Colors.blue)),
+            ),
+            onPressed: () {
+              setState(() {
+                _hasBeenPressedFloor = !_hasBeenPressedFloor;
+              });
+            },
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          FlatButton(
+            child: Container(
+              child: Row(
+                children: [
+                  Container(
+                    width: screenSize.width * 0.4,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          'images/$image4.png',
+                          width: screenSize.height * 0.08,
+                          height: screenSize.height * 0.08,
+                        ),
+                        Text(
+                          '$name4',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                              fontFamily: 'Poppins'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: screenSize.width * 0.4),
+                  Icon(
+                      _hasBeenPressedFurn
+                          ? Icons.check_circle_rounded
+                          : Icons.check_circle_outline_rounded,
+                      color:
+                          _hasBeenPressedFurn ? Colors.green : Colors.blueGrey)
+                ],
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.blue[100],
+                  border: Border.all(color: Colors.blue)),
+            ),
+            onPressed: () {
+              setState(() {
+                _hasBeenPressedFurn = !_hasBeenPressedFurn;
+              });
+            },
+          ),
+          SizedBox(
+            height: 0,
+          ),
+        ],
+      );
+    }
+
+    Row ServiceStaff(name1, name2) {
+      return Row(
+        children: <Widget>[
+          FlatButton(
+            onPressed: () {
+              setState(() {
+                _hasBeenPressedMaid = !_hasBeenPressedMaid;
+              });
+            },
+            child: Container(
+              width: screenSize.width * 0.35,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Text(
+                      '$name1',
+                      style: TextStyle(
+                          fontSize: screenSize.width * 0.028,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: 'Poppins'),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          screenSize.width * 0.05,
+                          screenSize.height * 0.01,
+                          0,
+                          screenSize.height * 0.01),
+                      child: Icon(
+                        _hasBeenPressedMaid
+                            ? Icons.check_circle_rounded
+                            : Icons.check_circle_outline_rounded,
+                        color: _hasBeenPressedMaid
+                            ? Colors.green
+                            : Colors.blueGrey,
+                      ),
+                    )
+                  ]),
+              margin: EdgeInsets.only(bottom: screenSize.height * 0.02),
+              padding:
+                  EdgeInsets.symmetric(horizontal: screenSize.width * 0.02),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(30)),
+            ),
+          ),
+          SizedBox(width: screenSize.width * 0.09),
+          FlatButton(
+            onPressed: () {
+              setState(() {
+                _hasBeenPressedStaff = !_hasBeenPressedStaff;
+              });
+            },
+            child: Container(
+              width: screenSize.width * 0.35,
+              child: Row(children: <Widget>[
+                Text(
+                  "$name2",
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.normal,
+                      fontFamily: 'Poppins'),
+                ),
+                Padding(
+                    padding: EdgeInsets.fromLTRB(screenSize.width * 0.2,
+                        screenSize.height * 0.01, 0, screenSize.height * 0.01),
+                    child: Icon(
+                        _hasBeenPressedStaff
+                            ? Icons.check_circle_rounded
+                            : Icons.check_circle_outline_rounded,
+                        color: _hasBeenPressedStaff
+                            ? Colors.green
+                            : Colors.blueGrey))
+              ]),
+              margin: EdgeInsets.only(bottom: 15),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(30)),
+            ),
+          )
+        ],
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.blue,
       appBar: AppBar(
@@ -128,288 +416,61 @@ class _ServicePickState extends State<ServicePick> {
         backgroundColor: Colors.blueAccent,
         elevation: 0.0,
       ),
-      body: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: const Radius.circular(40.0),
-              topRight: const Radius.circular(40.0),
-            )),
+      body: SingleChildScrollView(
         child: Container(
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  FlatButton(
-                    child: Icon(
-                      Icons.arrow_back_rounded,
-                      size: 30,
-                      color: Colors.blue,
+          height: screenSize.height * 0.81,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: const Radius.circular(40.0),
+                topRight: const Radius.circular(40.0),
+              )),
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    FlatButton(
+                      child: Icon(
+                        Icons.arrow_back_rounded,
+                        size: 30,
+                        color: Colors.blue,
+                      ),
+                      onPressed: () {},
                     ),
-                    onPressed: () {},
-                  ),
-                  Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'pick your services',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.blueGrey,
-                              fontFamily: 'Poppins'),
-                        ),
-                        Image.asset(
-                          'assets/6.jpg',
-                          height: 140,
-                          width: 170,
-                        )
-                      ]),
-                  FlatButton(
-                    child: Icon(
-                      Icons.arrow_forward_rounded,
-                      size: 30,
-                      color: Colors.blue,
-                    ),
-                    onPressed: () {},
-                  )
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      setState(() {
-                        _hasBeenPressedMaid = !_hasBeenPressedMaid;
-                      });
-                    },
-                    child: Container(
-                      child: Row(children: <Widget>[
-                        Text(
-                          "Disinfection",
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.normal,
-                              fontFamily: 'Poppins'),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Icon(
-                              _hasBeenPressedMaid
-                                  ? Icons.check_circle_rounded
-                                  : Icons.check_circle_outline_rounded,
-                              color: _hasBeenPressedMaid
-                                  ? Colors.green
-                                  : Colors.blueGrey),
-                        )
-                      ]),
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blue),
-                          borderRadius: BorderRadius.circular(30)),
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      setState(() {
-                        _hasBeenPressedStaff = !_hasBeenPressedStaff;
-                      });
-                    },
-                    child: Container(
-                      child: Row(children: <Widget>[
-                        Text(
-                          "staff",
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.normal,
-                              fontFamily: 'Poppins'),
-                        ),
-                        Padding(
-                            padding: EdgeInsets.all(15),
-                            child: Icon(
-                                _hasBeenPressedStaff
-                                    ? Icons.check_circle_rounded
-                                    : Icons.check_circle_outline_rounded,
-                                color: _hasBeenPressedStaff
-                                    ? Colors.green
-                                    : Colors.blueGrey))
-                      ]),
-                      margin: EdgeInsets.only(bottom: 15),
-                      padding: const EdgeInsets.symmetric(horizontal: 27),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blue),
-                          borderRadius: BorderRadius.circular(30)),
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                children: <Widget>[
-                  FlatButton(
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'images/stall.png',
-                            width: 60,
-                            height: 60,
-                          ),
+                    Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
                           Text(
-                            'Rooms',
+                            'pick your services',
                             style: TextStyle(
-                                fontWeight: FontWeight.w600,
                                 fontSize: 20,
+                                color: Colors.blueGrey,
                                 fontFamily: 'Poppins'),
                           ),
-                          SizedBox(width: 140),
-                          Icon(
-                              _hasBeenPressedLH
-                                  ? Icons.check_circle_rounded
-                                  : Icons.check_circle_outline_rounded,
-                              color: _hasBeenPressedLH
-                                  ? Colors.green
-                                  : Colors.blueGrey)
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Colors.blue[100],
-                          border: Border.all(color: Colors.blue)),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _hasBeenPressedLH = !_hasBeenPressedLH;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  FlatButton(
-                    child: Container(
-                      child: Row(
-                        children: [
                           Image.asset(
-                            'images/windows.png',
-                            width: 60,
-                            height: 60,
-                          ),
-                          Text(
-                            'Windows',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
-                                fontFamily: 'Poppins'),
-                          ),
-                          SizedBox(width: 120),
-                          Icon(
-                              _hasBeenPressedWind
-                                  ? Icons.check_circle_rounded
-                                  : Icons.check_circle_outline_rounded,
-                              color: _hasBeenPressedWind
-                                  ? Colors.green
-                                  : Colors.blueGrey)
-                        ],
+                            'assets/6.jpg',
+                            height: screenSize.height * 0.2,
+                            width: screenSize.width * 0.5,
+                          )
+                        ]),
+                    FlatButton(
+                      child: Icon(
+                        Icons.arrow_forward_rounded,
+                        size: 30,
+                        color: Colors.blue,
                       ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Colors.blue[100],
-                          border: Border.all(color: Colors.blue)),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _hasBeenPressedWind = !_hasBeenPressedWind;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  FlatButton(
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'images/floor.png',
-                            width: 60,
-                            height: 60,
-                          ),
-                          Text(
-                            'Floor',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
-                                fontFamily: 'Poppins'),
-                          ),
-                          SizedBox(width: 165),
-                          Icon(
-                              _hasBeenPressedFloor
-                                  ? Icons.check_circle_rounded
-                                  : Icons.check_circle_outline_rounded,
-                              color: _hasBeenPressedFloor
-                                  ? Colors.green
-                                  : Colors.blueGrey)
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Colors.blue[100],
-                          border: Border.all(color: Colors.blue)),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _hasBeenPressedFloor = !_hasBeenPressedFloor;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  FlatButton(
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'images/furniture.png',
-                            width: 60,
-                            height: 60,
-                          ),
-                          Text(
-                            'Furniture',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
-                                fontFamily: 'Poppins'),
-                          ),
-                          SizedBox(width: 120),
-                          Icon(
-                              _hasBeenPressedFurn
-                                  ? Icons.check_circle_rounded
-                                  : Icons.check_circle_outline_rounded,
-                              color: _hasBeenPressedFurn
-                                  ? Colors.green
-                                  : Colors.blueGrey)
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Colors.blue[100],
-                          border: Border.all(color: Colors.blue)),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _hasBeenPressedFurn = !_hasBeenPressedFurn;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 0,
-                  ),
-                ],
-              )
-            ],
+                      onPressed: () {},
+                    )
+                  ],
+                ),
+                ServiceStaff('Disentfection', 'staff'),
+                ServiceType('stall', 'windows', 'floor', 'furniture', 'Rooms',
+                    'Windows', 'floor', 'furniture')
+              ],
+            ),
           ),
         ),
       ),
