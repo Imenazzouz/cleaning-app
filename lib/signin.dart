@@ -323,18 +323,24 @@ class TopSginin extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Container(
-      margin: const EdgeInsets.only(top: 15, left: 20),
+      margin: const EdgeInsets.only(top: 15, left: 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            Icons.arrow_back_sharp,
-            color: whiteshade,
-            size: 25,
-          ),
+          MaterialButton(
+              minWidth: 0,
+              height: 0,
+              child: Icon(
+                Icons.arrow_back_sharp,
+                color: whiteshade,
+                size: 25,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/home');
+              }),
           SizedBox(
-            width: screenSize.width * 0.28,
+            width: screenSize.width * 0.25,
           ),
           Text(
             "Sign In",

@@ -66,7 +66,7 @@ class _Page1State extends State<Page1> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0, bottom: 10),
                 child: Text(
-                  'heyy  !',
+                  'Heyy  !',
                   style: TextStyle(
                       fontSize: 17.0,
                       fontFamily: 'Poppins',

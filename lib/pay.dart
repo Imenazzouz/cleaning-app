@@ -13,10 +13,42 @@ String paystackPublicKey = '{YOUR_PAYSTACK_PUBLIC_KEY}';
 class Pay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'payment',
       home: Scaffold(
+        backgroundColor: Colors.blue,
+        appBar: AppBar(
+          leading: BackButton(
+            color: Colors.white,
+            onPressed: () {
+              Navigator.pushNamed(context, '/location');
+            },
+          ),
+          title: Text(
+            'Cleaning master',
+            style: TextStyle(
+                fontSize: 17.0,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.0,
+                color: Colors.white),
+          ),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                // do something
+              },
+            )
+          ],
+          backgroundColor: Colors.blueAccent,
+          elevation: 0.0,
+        ),
         bottomNavigationBar: Bottombar(),
         body: HomePage(),
         resizeToAvoidBottomInset: false,
@@ -106,7 +138,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Container(
+      height: screenSize.height * 0.85,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: const Radius.circular(40.0),
+            topRight: const Radius.circular(40.0),
+          )),
       child: SafeArea(
         child: Column(
           children: <Widget>[
@@ -190,34 +230,13 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                          'Card Image',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Switch(
-                          value: useBackgroundImage,
-                          inactiveTrackColor: Colors.grey,
-                          activeColor: Colors.black,
-                          activeTrackColor: Colors.green,
-                          onChanged: (bool value) => setState(() {
-                            useBackgroundImage = value;
-                          }),
-                        ),
-                      ],
-                    ),
                     const SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(30),
                         ),
                         primary: const Color(0xff1b447b),
                       ),

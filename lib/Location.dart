@@ -17,6 +17,9 @@ class _LocationState extends State<Location> {
       appBar: AppBar(
         leading: BackButton(
           color: Colors.white,
+          onPressed: () {
+            Navigator.pushNamed(context, '/page1');
+          },
         ),
         title: Text(
           'Cleaning master',

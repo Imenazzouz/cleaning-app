@@ -12,105 +12,103 @@ class SignUp extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Stack(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                color: blue,
-              ),
-              const TopSginup(),
-              Positioned(
-                top: MediaQuery.of(context).size.height * 0.07,
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.9,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      color: whiteshade,
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(45),
-                          topRight: Radius.circular(45))),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 180,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.08),
-                        child: Image.asset("assets/h.jpg"),
-                      ),
-                      InputField(headerText: "Username", hintTexti: "Username"),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      InputField(
-                          headerText: "Email", hintTexti: "dion@example.com"),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      InputFieldPassword(
-                        headerText: "Password",
-                        hintTexti: "At least 8 Charecter",
-                      ),
-                      const CheckerBox(),
-                      InkWell(
-                        onTap: () {
-
-                          print("Sign up click");
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.07,
-                          margin: const EdgeInsets.only(left: 20, right: 20),
-                          decoration: BoxDecoration(
-                              color: blue,
-                              borderRadius:
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: blue,
+          ),
+          const TopSginup(),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.07,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.9,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  color: whiteshade,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(45),
+                      topRight: Radius.circular(45))),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 180,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.08),
+                    child: Image.asset("assets/h.jpg"),
+                  ),
+                  InputField(headerText: "Username", hintTexti: "Username"),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  InputField(
+                      headerText: "Email", hintTexti: "dion@example.com"),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  InputFieldPassword(
+                    headerText: "Password",
+                    hintTexti: "At least 8 Charecter",
+                  ),
+                  const CheckerBox(),
+                  InkWell(
+                    onTap: () {
+                      print("Sign up click");
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      margin: const EdgeInsets.only(left: 20, right: 20),
+                      decoration: BoxDecoration(
+                          color: blue,
+                          borderRadius:
                               const BorderRadius.all(Radius.circular(30))),
-                          child: Center(
-                            child: Text(
-                              "Sign up",
-                              style: TextStyle(
-
-                                letterSpacing: 1,
-                                fontSize: 24,
-                                fontWeight: FontWeight.w600,
-                                color: whiteshade,
-                                fontFamily: 'poppins',
-                              ),
-                            ),
+                      child: Center(
+                        child: Text(
+                          "Sign up",
+                          style: TextStyle(
+                            letterSpacing: 1,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                            color: whiteshade,
+                            fontFamily: 'poppins',
                           ),
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.18,
-                            top: MediaQuery.of(context).size.height * 0.08),
-                        child: Text.rich(
-                          TextSpan(
-                              text: "I already Have an account ",
-                              style: TextStyle(
-                                  color: grayshade.withOpacity(0.8), fontSize: 16),
-                              children: [
-                                TextSpan(
-                                    text: "Sign up",
-                                    style: TextStyle(color: blue, fontSize: 16),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => Page2()));
-                                        print("Sign in click");
-                                      }),
-                              ]),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.18,
+                        top: MediaQuery.of(context).size.height * 0.08),
+                    child: Text.rich(
+                      TextSpan(
+                          text: "I already Have an account ",
+                          style: TextStyle(
+                              color: grayshade.withOpacity(0.8), fontSize: 16),
+                          children: [
+                            TextSpan(
+                                text: "Sign in",
+                                style: TextStyle(color: blue, fontSize: 16),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Signin()));
+                                    print("Sign in click");
+                                  }),
+                          ]),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          )),
+            ),
+          ),
+        ],
+      )),
     );
   }
 }
@@ -153,16 +151,19 @@ class _CheckerBoxState extends State<CheckerBox> {
           Text.rich(
             TextSpan(
                 text: "I agree with ",
-                style:
-                TextStyle(
+                style: TextStyle(
                     letterSpacing: 0.7,
-                    fontFamily: 'poppins',color: grayshade.withOpacity(0.8), fontSize: 16),
+                    fontFamily: 'poppins',
+                    color: grayshade.withOpacity(0.8),
+                    fontSize: 16),
                 children: [
                   TextSpan(
                       text: "Terms ",
                       style: TextStyle(
                           letterSpacing: 0.7,
-                          fontFamily: 'poppins',color: blue, fontSize: 14)),
+                          fontFamily: 'poppins',
+                          color: blue,
+                          fontSize: 14)),
                   const TextSpan(text: "and "),
                   TextSpan(
                       text: "Policy",
@@ -198,7 +199,9 @@ class InputField extends StatelessWidget {
             style: const TextStyle(
                 color: Colors.blueAccent,
                 letterSpacing: 0.7,
-                fontFamily: 'poppins', fontSize: 16, fontWeight: FontWeight.w600),
+                fontFamily: 'poppins',
+                fontSize: 16,
+                fontWeight: FontWeight.w600),
           ),
         ),
         Container(
@@ -219,9 +222,9 @@ class InputField extends StatelessWidget {
                 ),
               ),
             )
-          //IntrinsicHeight
+            //IntrinsicHeight
 
-        ),
+            ),
       ],
     );
   }
@@ -259,7 +262,9 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
             style: const TextStyle(
                 color: Colors.blueAccent,
                 letterSpacing: 0.7,
-                fontFamily: 'poppins',fontSize: 16, fontWeight: FontWeight.w600),
+                fontFamily: 'poppins',
+                fontSize: 16,
+                fontWeight: FontWeight.w600),
           ),
         ),
         Container(
@@ -301,23 +306,37 @@ class TopSginup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+
     return Container(
-      margin: const EdgeInsets.only(top: 15, left: 20),
+      margin: const EdgeInsets.only(top: 15, left: 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            Icons.arrow_back_sharp,
-            color: whiteshade,
-            size: 40,
-          ),
-          const SizedBox(
-            width: 80,
+          MaterialButton(
+              minWidth: 0,
+              height: 0,
+              padding: EdgeInsets.zero,
+              child: Icon(
+                Icons.arrow_back_sharp,
+                color: whiteshade,
+                size: 30,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/home');
+              }),
+          SizedBox(
+            width: screenSize.width * 0.25,
           ),
           Text(
             "Sign up",
-            style: TextStyle(color: whiteshade, fontSize: 20,fontFamily: 'poppins', fontWeight: FontWeight.w600,letterSpacing: 1),
+            style: TextStyle(
+                color: whiteshade,
+                fontSize: 20,
+                fontFamily: 'poppins',
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1),
           )
         ],
       ),
