@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/Restaurant.dart';
@@ -18,18 +16,20 @@ import 'package:myapp/signup.dart';
 import 'package:myapp/splash.dart';
 import 'package:myapp/Location.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:myapp/companies.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:  WelcomeScreen(),
+      home: WelcomeScreen(),
       initialRoute: '/home',
       debugShowCheckedModeBanner: false,
       title: 'Welcome Screen',
@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
         '/page1': (context) => Page1(),
         '/pay': (context) => Pay(),
         '/location': (context) => Location(),
+        '/companies': (context) => Companies(),
       },
     );
   }
@@ -207,5 +208,3 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 }
-
-
