@@ -78,7 +78,8 @@ class _LocationState extends State<Location> {
                         ),
                         borderRadius: BorderRadius.circular(30.0),
                       ),
-                      hintText: 'Enter your last name'),
+                      hintText: 'Enter your last name',
+                      hintStyle: TextStyle(fontFamily: 'Poppins')),
                 ),
                 SizedBox(height: screenSize.height * 0.03),
                 Text(
@@ -100,7 +101,8 @@ class _LocationState extends State<Location> {
                         ),
                         borderRadius: BorderRadius.circular(30.0),
                       ),
-                      hintText: 'Enter your first name'),
+                      hintText: 'Enter your first name',
+                      hintStyle: TextStyle(fontFamily: 'Poppins')),
                 ),
                 SizedBox(height: screenSize.height * 0.03),
                 Text(
@@ -111,20 +113,20 @@ class _LocationState extends State<Location> {
                 TextField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.circular(30.0),
                       ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.blue,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.blue,
+                        ),
+                        borderRadius: BorderRadius.circular(30.0),
                       ),
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    hintText: 'Enter your phone number',
-                  ),
+                      hintText: 'Enter your phone number',
+                      hintStyle: TextStyle(fontFamily: 'Poppins')),
                 ),
                 SizedBox(height: screenSize.height * 0.03),
                 Text(
@@ -147,7 +149,8 @@ class _LocationState extends State<Location> {
                         ),
                         borderRadius: BorderRadius.circular(30.0),
                       ),
-                      hintText: 'Enter your address'),
+                      hintText: 'Enter your address',
+                      hintStyle: TextStyle(fontFamily: 'Poppins')),
                 ),
                 SizedBox(height: screenSize.height * 0.03),
                 Text(
@@ -156,21 +159,22 @@ class _LocationState extends State<Location> {
                       fontFamily: 'Poppins', fontWeight: FontWeight.w600),
                 ),
                 TextField(
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      hintText: 'Enter your Region'),
-                ),
+                    decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black,
+                    ),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.blue,
+                    ),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  hintText: 'Enter your Region',
+                  hintStyle: TextStyle(fontFamily: 'Poppins'),
+                )),
                 SizedBox(height: screenSize.height * 0.03),
                 Text(
                   'City',
@@ -178,21 +182,21 @@ class _LocationState extends State<Location> {
                       fontFamily: 'Poppins', fontWeight: FontWeight.w600),
                 ),
                 TextField(
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blue,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      hintText: 'Enter your last city'),
-                ),
+                        hintText: 'Enter your last city',
+                        hintStyle: TextStyle(fontFamily: 'Poppins'))),
                 SizedBox(height: screenSize.height * 0.03),
                 Container(
                   decoration: BoxDecoration(

@@ -8,11 +8,7 @@ import 'package:myapp/services/auth.dart';
 import 'package:myapp/signup.dart';
 
 class Signin extends StatefulWidget {
-
   const Signin({Key? key}) : super(key: key);
-
-
-
 
   @override
   State<Signin> createState() => _SigninState();
@@ -27,8 +23,6 @@ class _SigninState extends State<Signin> {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
-
-
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -60,17 +54,60 @@ class _SigninState extends State<Signin> {
                         left: MediaQuery.of(context).size.width * 0.09),
                     child: Image.asset("assets/h.jpg"),
                   ),
-
                   const SizedBox(
                     height: 10,
                   ),
+                  SingleChildScrollView(
+                    reverse: true,
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 10,
+                      ),
+                      child: Text(
+                        'Email',
+                        style: const TextStyle(
+                            color: Colors.blueAccent,
+                            letterSpacing: 0.7,
+                            fontFamily: 'poppins',
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      bottom: 20,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(45),
+                      border: Border.all(color: Colors.blueAccent, width: 1.7),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10.0, left: 10),
+                      child: TextField(
+                        controller: emailcontroller,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                          hintText: "   salah@gmail.com",
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
                   Container(
                     margin: const EdgeInsets.only(
                       left: 20,
                       right: 20,
                       bottom: 10,
                     ),
-                    child: Text( 'Email',
+                    child: Text(
+                      'Password',
                       style: const TextStyle(
                           color: Colors.blueAccent,
                           letterSpacing: 0.7,
@@ -78,100 +115,47 @@ class _SigninState extends State<Signin> {
                           fontSize: 18,
                           fontWeight: FontWeight.w600),
                     ),
-                  ),SizedBox(height: 5),
-
-              Container(
-                margin: const EdgeInsets.only(
-                  left: 20,
-                  right: 20,
-                  bottom: 20,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(45),
-                  border: Border.all(color: Colors.blueAccent,width: 1.7),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10.0,left: 10),
-                  child: TextField(
-
-
-
-                    controller: emailcontroller,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
-                            hintText: "   salah@gmail.com",
-                            border: InputBorder.none,
-
-
-                          ),
                   ),
-                ),
-              ),
+                  SizedBox(height: 5),
                   Container(
-
                     margin: const EdgeInsets.only(
                       left: 20,
                       right: 20,
-                      bottom: 10,
+                      bottom: 20,
                     ),
-                    child: Text( 'Password',
-                      style: const TextStyle(
-                          color: Colors.blueAccent,
-                          letterSpacing: 0.7,
-                          fontFamily: 'poppins',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(45),
+                      border: Border.all(color: Colors.blueAccent, width: 1.7),
                     ),
-                  ),SizedBox(height: 5),
-              Container( margin: const EdgeInsets.only(
-                left: 20,
-                right: 20,
-                bottom: 20,
-              ),
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(45),
-                  border: Border.all(color: Colors.blueAccent, width: 1.7),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10.0,left: 10),
-                  child: TextField(
-
-                    obscureText: _visible,
-                    controller: passwordcontroller,
-
-                    decoration: InputDecoration(
-
-                      suffixIcon: IconButton(
-                          icon: Icon(
-                              _visible ? Icons.visibility : Icons.visibility_off),
-                          onPressed: () {
-                            setState(() {
-                              _visible = !_visible;
-                            });
-                          }),
-                      hintText: "   minumum 8 characters",
-                      border: InputBorder.none,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10.0, left: 10),
+                      child: TextField(
+                        obscureText: _visible,
+                        controller: passwordcontroller,
+                        decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                              icon: Icon(_visible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                              onPressed: () {
+                                setState(() {
+                                  _visible = !_visible;
+                                });
+                              }),
+                          hintText: "   minumum 8 characters",
+                          border: InputBorder.none,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-
-              ),
-
                   Row(
-
                     children: [
                       const CheckerBox(),
-
                     ],
                   ),
                   InkWell(
-                    onTap: ()  {
-
-    },
-
-
+                    onTap: () {},
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.07,
@@ -181,18 +165,14 @@ class _SigninState extends State<Signin> {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(30))),
                       child: Center(
-
-                        child:  Container(
+                        child: Container(
                           width: 300,
                           decoration: BoxDecoration(
-
                               color: Colors.blueAccent,
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(30))),
+                                  const BorderRadius.all(Radius.circular(30))),
                           child: FlatButton(
-
-
-                                 child: const Text(
+                            child: const Text(
                               'sign in ',
                               style: TextStyle(
                                   color: Colors.white,
@@ -201,24 +181,21 @@ class _SigninState extends State<Signin> {
                                   fontWeight: FontWeight.w600,
                                   letterSpacing: 1),
                             ),
-
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             textColor: Colors.black,
                             height: 65.0,
-
                             onPressed: () {
                               AuthenticationHelper()
                                   .signIn(
-                                  email: emailcontroller.text,
-                                  password: passwordcontroller.text)
+                                      email: emailcontroller.text,
+                                      password: passwordcontroller.text)
                                   .then((result) {
                                 if (result == null) {
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => Page1()));
-
                                 } else {
                                   Scaffold.of(context).showSnackBar(SnackBar(
                                     content: Text(
@@ -274,23 +251,6 @@ class _SigninState extends State<Signin> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class CheckerBox extends StatefulWidget {
   const CheckerBox({
     Key? key,
@@ -341,8 +301,6 @@ class _CheckerBoxState extends State<CheckerBox> {
 
 // ignore: must_be_immutable
 class InputField extends StatelessWidget {
-
-
   String headerText;
   String hintTexti;
   InputField({Key? key, required this.headerText, required this.hintTexti})
@@ -396,7 +354,6 @@ class InputField extends StatelessWidget {
 }
 
 class InputFieldPassword extends StatefulWidget {
-
   String headerText;
   String hintTexti;
 
@@ -410,7 +367,6 @@ class InputFieldPassword extends StatefulWidget {
 class _InputFieldPasswordState extends State<InputFieldPassword> {
   bool _visible = true;
   TextEditingController passwordcontroller = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -467,11 +423,9 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
 }
 
 class TopSginin extends StatelessWidget {
-
   const TopSginin({
     Key? key,
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -490,11 +444,7 @@ class TopSginin extends StatelessWidget {
                 color: whiteshade,
                 size: 25,
               ),
-              onPressed: () {
-
-
-
-              }),
+              onPressed: () {}),
           SizedBox(
             width: screenSize.width * 0.25,
           ),
@@ -512,4 +462,3 @@ class TopSginin extends StatelessWidget {
     );
   }
 }
-

@@ -6,9 +6,7 @@ import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
-String backendUrl = '{YOUR_BACKEND_URL}';
 // Set this to a public key that matches the secret key you supplied while creating the heroku instance
-String paystackPublicKey = '{YOUR_PAYSTACK_PUBLIC_KEY}';
 
 class Pay extends StatelessWidget {
   @override
@@ -138,8 +136,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQuery = MediaQuery.of(context);
     var screenSize = MediaQuery.of(context).size;
     return Container(
+      padding: EdgeInsets.only(bottom: mediaQuery.viewInsets.bottom),
       height: screenSize.height * 0.85,
       decoration: BoxDecoration(
           color: Colors.white,
@@ -179,6 +179,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               child: SingleChildScrollView(
+                reverse: true,
                 child: Column(
                   children: <Widget>[
                     CreditCardForm(
@@ -197,30 +198,38 @@ class _HomePageState extends State<HomePage> {
                       cardNumberDecoration: InputDecoration(
                         labelText: 'Number',
                         hintText: 'XXXX XXXX XXXX XXXX',
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        labelStyle: const TextStyle(color: Colors.black),
+                        hintStyle: const TextStyle(
+                            color: Colors.grey, fontFamily: 'Poppins'),
+                        labelStyle: const TextStyle(
+                            color: Colors.black, fontFamily: 'Poppins'),
                         focusedBorder: border,
                         enabledBorder: border,
                       ),
                       expiryDateDecoration: InputDecoration(
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        labelStyle: const TextStyle(color: Colors.black),
+                        hintStyle: const TextStyle(
+                            color: Colors.grey, fontFamily: 'Poppins'),
+                        labelStyle: const TextStyle(
+                            color: Colors.black, fontFamily: 'Poppins'),
                         focusedBorder: border,
                         enabledBorder: border,
                         labelText: 'Expired Date',
                         hintText: 'XX/XX',
                       ),
                       cvvCodeDecoration: InputDecoration(
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        labelStyle: const TextStyle(color: Colors.black),
+                        hintStyle: const TextStyle(
+                            color: Colors.grey, fontFamily: 'Poppins'),
+                        labelStyle: const TextStyle(
+                            color: Colors.black, fontFamily: 'Poppins'),
                         focusedBorder: border,
                         enabledBorder: border,
                         labelText: 'CVV',
                         hintText: 'XXX',
                       ),
                       cardHolderDecoration: InputDecoration(
-                        hintStyle: const TextStyle(color: Colors.grey),
-                        labelStyle: const TextStyle(color: Colors.grey),
+                        hintStyle: const TextStyle(
+                            color: Colors.grey, fontFamily: 'Poppins'),
+                        labelStyle: const TextStyle(
+                            color: Colors.grey, fontFamily: 'Poppins'),
                         focusedBorder: border,
                         enabledBorder: border,
                         labelText: 'Card Holder',
