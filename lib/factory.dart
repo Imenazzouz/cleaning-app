@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/bottomnav.dart';
 
 class Factory extends StatefulWidget {
   const Factory({Key? key}) : super(key: key);
@@ -15,75 +16,12 @@ class _FactoryState extends State<Factory> {
       body: Container(
         child: ServicePick(),
       ),
-      bottomNavigationBar: Bottombar(),
+      bottomNavigationBar: Navbar(),
     );
   }
 }
 
-class Bottombar extends StatefulWidget {
-  const Bottombar({Key? key}) : super(key: key);
 
-  @override
-  _BottombarState createState() => _BottombarState();
-}
-
-class _BottombarState extends State<Bottombar> {
-  int selectedIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.white,
-              spreadRadius: 15,
-              blurRadius: 9,
-            )
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
-          ),
-          child: BottomNavigationBar(
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            backgroundColor: Colors.blueAccent,
-            currentIndex: this.selectedIndex,
-            selectedIconTheme: IconThemeData(
-              color: Colors.blue[900],
-              size: 40,
-            ),
-            unselectedIconTheme:
-                const IconThemeData(color: Colors.white, size: 35),
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.history),
-                title: Text(" History"),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                title: Text("Emails"),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                title: Text("Profile"),
-              )
-            ],
-            onTap: (int index) {
-              setState(() {
-                selectedIndex = index;
-              });
-            },
-          ),
-        ));
-  }
-}
 
 class ServicePick extends StatefulWidget {
   const ServicePick({Key? key}) : super(key: key);

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/bottomnav.dart';
+import 'package:myapp/companies.dart';
+import 'package:myapp/company.dart';
 import 'package:myapp/nard.dart';
 
 class Page1 extends StatefulWidget {
@@ -13,6 +16,9 @@ class _Page1State extends State<Page1> {
   static const _kDuration = const Duration(milliseconds: 300);
   static const _kCurve = Curves.ease;
   int _currentIndex = 0;
+  int _selectedIndex = 0;
+
+
   List<String> _listImages = [
     "assets/a.jpg",
     "assets/b.jpg",
@@ -51,15 +57,18 @@ class _Page1State extends State<Page1> {
             },
           )
         ],
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.blue,
         elevation: 0.0,
       ),
-      body: SingleChildScrollView(
+      body:
+      SingleChildScrollView(
         child: Container(
           height: screenSize.height * 0.85,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
+                bottomRight: const Radius.circular(40.0),
+                bottomLeft:const Radius.circular(40.0) ,
                 topLeft: const Radius.circular(40.0),
                 topRight: const Radius.circular(40.0),
               )),
@@ -344,58 +353,9 @@ class _Page1State extends State<Page1> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-            boxShadow: [
-              BoxShadow(color: Colors.white, spreadRadius: 15, blurRadius: 8),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30.0),
-              topRight: Radius.circular(30.0),
-            ),
-            child: BottomNavigationBar(
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              backgroundColor: Colors.blueAccent,
-              currentIndex: _currentIndex,
-              selectedIconTheme: IconThemeData(
-                color: Colors.blue[900],
-                size: 40,
-              ),
-              unselectedIconTheme:
-              const IconThemeData(color: Colors.white, size: 35),
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.history),
-                  title: Text(" History"),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  title: Text("Emails"),
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  title: Text("Profile"),
-                )
-              ],
-              onTap: (int index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-            ),
-          )),
+
     );
   }
 
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
+
 }

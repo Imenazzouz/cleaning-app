@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/bottomnav.dart';
 
 class Company extends StatefulWidget {
   const Company({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _CompanyState extends State<Company> {
         height: screenSize.height,
         child: ServicePick(),
       ),
-      bottomNavigationBar: Bottombar(),
+      bottomNavigationBar: Navbar(),
     );
   }
 }

@@ -10,6 +10,7 @@ import 'package:myapp/items.dart';
 import 'package:myapp/page1.dart';
 import 'package:myapp/page2.dart';
 import 'package:myapp/pay.dart';
+import 'package:myapp/profile.dart';
 import 'package:myapp/services/auth.dart';
 import 'package:myapp/signin.dart';
 import 'package:myapp/signup.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Welcome Screen',
       routes: {
-        '/home': (context) => WelcomeScreen(),
+        '/profile' :(context) => WelcomeScreen(),
+        '/home': (context) => ProfilePage(),
         '/signin': (context) => Signin(),
         '/signup': (context) => SignUp(),
         '/page2': (context) => Page2(),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/bottomnav.dart';
 
 class Restaurant extends StatefulWidget {
   const Restaurant({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class _RestaurantState extends State<Restaurant> {
       body: Container(
         child: ServicePick(),
       ),
-      bottomNavigationBar: Bottombar(),
+      bottomNavigationBar: Navbar(),
     );
   }
 }
