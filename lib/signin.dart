@@ -1,13 +1,34 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/constant.dart';
+import 'package:myapp/page1.dart';
+import 'package:myapp/services/auth.dart';
 import 'package:myapp/signup.dart';
 
-class Signin extends StatelessWidget {
+class Signin extends StatefulWidget {
+
   const Signin({Key? key}) : super(key: key);
 
+
+
+
   @override
+  State<Signin> createState() => _SigninState();
+}
+
+class _SigninState extends State<Signin> {
+  bool _validate = false;
+  bool _visible = true;
+  final _controller = TextEditingController();
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  @override
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -20,7 +41,7 @@ class Signin extends StatelessWidget {
           ),
           const TopSginin(),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.07,
+            top: MediaQuery.of(context).size.height * 0.09,
             child: Container(
               height: MediaQuery.of(context).size.height * 0.9,
               width: MediaQuery.of(context).size.width,
@@ -39,50 +60,118 @@ class Signin extends StatelessWidget {
                         left: MediaQuery.of(context).size.width * 0.09),
                     child: Image.asset("assets/h.jpg"),
                   ),
-                  Container(
-                      child: InputField(
-                    headerText: "Username",
-                    hintTexti: "Username",
-                  )),
+
                   const SizedBox(
                     height: 10,
                   ),
-                  // InputField(
-                  //   headerText: "Email",
-                  //   hintTexti: "aaa@example.com",
-                  //   visible: false,
-                  // ),
-                  // const SizedBox(
-                  //   height: 10,
-                  // ),
-                  InputFieldPassword(
-                      headerText: "Password",
-                      hintTexti: "At least 8 Charecter"),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      bottom: 10,
+                    ),
+                    child: Text( 'Email',
+                      style: const TextStyle(
+                          color: Colors.blueAccent,
+                          letterSpacing: 0.7,
+                          fontFamily: 'poppins',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),SizedBox(height: 5),
+
+              Container(
+                margin: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  bottom: 20,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(45),
+                  border: Border.all(color: Colors.blueAccent,width: 1.7),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0,left: 10),
+                  child: TextField(
+
+
+
+                    controller: emailcontroller,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: const InputDecoration(
+                            hintText: "   salah@gmail.com",
+                            border: InputBorder.none,
+
+
+                          ),
+                  ),
+                ),
+              ),
+                  Container(
+
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      bottom: 10,
+                    ),
+                    child: Text( 'Password',
+                      style: const TextStyle(
+                          color: Colors.blueAccent,
+                          letterSpacing: 0.7,
+                          fontFamily: 'poppins',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),SizedBox(height: 5),
+              Container( margin: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                bottom: 20,
+              ),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(45),
+                  border: Border.all(color: Colors.blueAccent, width: 1.7),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0,left: 10),
+                  child: TextField(
+
+                    obscureText: _visible,
+                    controller: passwordcontroller,
+
+                    decoration: InputDecoration(
+
+                      suffixIcon: IconButton(
+                          icon: Icon(
+                              _visible ? Icons.visibility : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _visible = !_visible;
+                            });
+                          }),
+                      hintText: "   minumum 8 characters",
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+
+              ),
 
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                     children: [
                       const CheckerBox(),
-                      Container(
-                        margin: EdgeInsets.only(right: 20),
-                        child: InkWell(
-                          onTap: () {},
-                          child: Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                                fontFamily: 'poppins',
-                                color: blue.withOpacity(0.7),
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ),
+
                     ],
                   ),
                   InkWell(
-                    onTap: () {
-                      print("Sign up click");
-                      Navigator.pushNamed(context, '/page1');
-                    },
+                    onTap: ()  {
+
+    },
+
+
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.07,
@@ -92,14 +181,55 @@ class Signin extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(30))),
                       child: Center(
-                        child: Text(
-                          "Sign in",
-                          style: TextStyle(
-                              color: whiteshade,
-                              fontSize: 20,
-                              fontFamily: 'poppins',
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 1),
+
+                        child:  Container(
+                          width: 300,
+                          decoration: BoxDecoration(
+
+                              color: Colors.blueAccent,
+                              borderRadius:
+                              const BorderRadius.all(Radius.circular(30))),
+                          child: FlatButton(
+
+
+                                 child: const Text(
+                              'sign in ',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontFamily: 'poppins',
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 1),
+                            ),
+
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                            textColor: Colors.black,
+                            height: 65.0,
+
+                            onPressed: () {
+                              AuthenticationHelper()
+                                  .signIn(
+                                  email: emailcontroller.text,
+                                  password: passwordcontroller.text)
+                                  .then((result) {
+                                if (result == null) {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Page1()));
+
+                                } else {
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text(
+                                      result,
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ));
+                                }
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ),
@@ -143,6 +273,23 @@ class Signin extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class CheckerBox extends StatefulWidget {
   const CheckerBox({
@@ -194,6 +341,8 @@ class _CheckerBoxState extends State<CheckerBox> {
 
 // ignore: must_be_immutable
 class InputField extends StatelessWidget {
+
+
   String headerText;
   String hintTexti;
   InputField({Key? key, required this.headerText, required this.hintTexti})
@@ -247,19 +396,21 @@ class InputField extends StatelessWidget {
 }
 
 class InputFieldPassword extends StatefulWidget {
+
   String headerText;
   String hintTexti;
 
   InputFieldPassword(
       {Key? key, required this.headerText, required this.hintTexti})
       : super(key: key);
-
   @override
   State<InputFieldPassword> createState() => _InputFieldPasswordState();
 }
 
 class _InputFieldPasswordState extends State<InputFieldPassword> {
   bool _visible = true;
+  TextEditingController passwordcontroller = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -294,6 +445,7 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: TextField(
+              controller: passwordcontroller,
               obscureText: _visible,
               decoration: InputDecoration(
                   hintText: widget.hintTexti,
@@ -315,9 +467,11 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
 }
 
 class TopSginin extends StatelessWidget {
+
   const TopSginin({
     Key? key,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -337,7 +491,9 @@ class TopSginin extends StatelessWidget {
                 size: 25,
               ),
               onPressed: () {
-                Navigator.pushNamed(context, '/home');
+
+
+
               }),
           SizedBox(
             width: screenSize.width * 0.25,
@@ -356,3 +512,4 @@ class TopSginin extends StatelessWidget {
     );
   }
 }
+

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/nard.dart';
 
 class Page1 extends StatefulWidget {
   const Page1({Key? key}) : super(key: key);
@@ -11,8 +12,7 @@ class _Page1State extends State<Page1> {
   final _controller = new PageController();
   static const _kDuration = const Duration(milliseconds: 300);
   static const _kCurve = Curves.ease;
-  int selectedIndex = 0;
-  int _count = 0;
+  int _currentIndex = 0;
   List<String> _listImages = [
     "assets/a.jpg",
     "assets/b.jpg",
@@ -21,13 +21,15 @@ class _Page1State extends State<Page1> {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
+      drawer: NavDrawer(),
       backgroundColor: Colors.blue,
       appBar: AppBar(
-        leading: BackButton(
-          color: Colors.white,
-        ),
+
+
         title: Text(
           'Cleaning master',
           style: TextStyle(
@@ -41,7 +43,7 @@ class _Page1State extends State<Page1> {
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.settings,
+              Icons.notifications,
               color: Colors.white,
             ),
             onPressed: () {
@@ -156,7 +158,7 @@ class _Page1State extends State<Page1> {
                         child: Text(
                           'Company',
                           style:
-                              TextStyle(fontSize: 15.0, fontFamily: 'Poppins'),
+                          TextStyle(fontSize: 15.0, fontFamily: 'Poppins'),
                         ),
                       ),
                     ),
@@ -360,13 +362,13 @@ class _Page1State extends State<Page1> {
               showSelectedLabels: false,
               showUnselectedLabels: false,
               backgroundColor: Colors.blueAccent,
-              currentIndex: this.selectedIndex,
+              currentIndex: _currentIndex,
               selectedIconTheme: IconThemeData(
                 color: Colors.blue[900],
                 size: 40,
               ),
               unselectedIconTheme:
-                  const IconThemeData(color: Colors.white, size: 35),
+              const IconThemeData(color: Colors.white, size: 35),
               items: const [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.history),
@@ -383,11 +385,17 @@ class _Page1State extends State<Page1> {
               ],
               onTap: (int index) {
                 setState(() {
-                  selectedIndex = index;
+                  _currentIndex = index;
                 });
               },
             ),
           )),
     );
+  }
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 }

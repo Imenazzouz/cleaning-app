@@ -164,7 +164,7 @@ class _ServicePickState extends State<ServicePick> {
                       children: [
                         Image.asset(
                           'images/$image2.png',
-                          width: screenSize.height * 0.08,
+                          width: screenSize.height * 0.07,
                           height: screenSize.height * 0.08,
                         ),
                         Text(
@@ -366,7 +366,7 @@ class _ServicePickState extends State<ServicePick> {
                       fontFamily: 'Poppins'),
                 ),
                 Padding(
-                    padding: EdgeInsets.fromLTRB(screenSize.width * 0.2,
+                    padding: EdgeInsets.fromLTRB(screenSize.width * 0.1,
                         screenSize.height * 0.01, 0, screenSize.height * 0.01),
                     child: Icon(
                         _hasBeenPressedStaff
@@ -418,7 +418,7 @@ class _ServicePickState extends State<ServicePick> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: screenSize.height * 0.81,
+          height: screenSize.height * 0.80,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(

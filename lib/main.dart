@@ -1,5 +1,9 @@
+
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/Restaurant.dart';
+import 'package:myapp/companies.dart';
 import 'package:myapp/company.dart';
 import 'package:myapp/factory.dart';
 import 'package:myapp/hospital.dart';
@@ -8,19 +12,24 @@ import 'package:myapp/items.dart';
 import 'package:myapp/page1.dart';
 import 'package:myapp/page2.dart';
 import 'package:myapp/pay.dart';
+import 'package:myapp/services/auth.dart';
 import 'package:myapp/signin.dart';
 import 'package:myapp/signup.dart';
 import 'package:myapp/splash.dart';
 import 'package:myapp/Location.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MyApp());
-
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const Signin(),
+      home:  WelcomeScreen(),
       initialRoute: '/home',
       debugShowCheckedModeBanner: false,
       title: 'Welcome Screen',
@@ -198,3 +207,5 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 }
+
+
