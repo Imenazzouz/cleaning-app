@@ -47,72 +47,10 @@ class Pay extends StatelessWidget {
           backgroundColor: Colors.blueAccent,
           elevation: 0.0,
         ),
-        bottomNavigationBar: Bottombar(),
         body: HomePage(),
         resizeToAvoidBottomInset: false,
       ),
     );
-  }
-}
-
-class Bottombar extends StatefulWidget {
-  const Bottombar({Key? key}) : super(key: key);
-
-  @override
-  _BottombarState createState() => _BottombarState();
-}
-
-class _BottombarState extends State<Bottombar> {
-  int selectedIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-          boxShadow: [
-            BoxShadow(color: Colors.white, spreadRadius: 15, blurRadius: 8),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
-          ),
-          child: BottomNavigationBar(
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            backgroundColor: Colors.blueAccent,
-            currentIndex: this.selectedIndex,
-            selectedIconTheme: IconThemeData(
-              color: Colors.blue[900],
-              size: 40,
-            ),
-            unselectedIconTheme:
-                const IconThemeData(color: Colors.white, size: 35),
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.history),
-                title: Text(" History"),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                title: Text("Emails"),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                title: Text("Profile"),
-              )
-            ],
-            onTap: (int index) {
-              setState(() {
-                selectedIndex = index;
-              });
-            },
-          ),
-        ));
   }
 }
 
@@ -140,7 +78,7 @@ class _HomePageState extends State<HomePage> {
     var screenSize = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.only(bottom: mediaQuery.viewInsets.bottom),
-      height: screenSize.height * 0.85,
+      height: screenSize.height,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(

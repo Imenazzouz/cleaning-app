@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/ProvidingCompanies.dart';
 import 'package:myapp/Restaurant.dart';
 import 'package:myapp/companies.dart';
 import 'package:myapp/company.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         '/pay': (context) => Pay(),
         '/location': (context) => Location(),
         '/companies': (context) => Companies(),
+        '/providedby': (context) => ChooseCompany()
       },
     );
   }

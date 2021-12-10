@@ -373,9 +373,7 @@ class _ServicePickState extends State<ServicePick> {
                         size: 30,
                         color: Colors.blue,
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/companies');
-                      },
+                      onPressed: () {},
                     ),
                     Column(
                         mainAxisSize: MainAxisSize.min,
@@ -401,7 +399,7 @@ class _ServicePickState extends State<ServicePick> {
                         color: Colors.blue,
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/location');
+                        Navigator.pushNamed(context, '/providedby');
                       },
                     )
                   ],

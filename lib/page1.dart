@@ -4,6 +4,7 @@ import 'package:myapp/Profile.dart';
 import 'package:myapp/Services.dart';
 import 'package:myapp/companies.dart';
 import 'package:myapp/nard.dart';
+import 'ProvidingCompanies.dart';
 
 class Page1 extends StatefulWidget {
   const Page1({Key? key}) : super(key: key);
