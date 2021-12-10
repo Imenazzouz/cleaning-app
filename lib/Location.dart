@@ -215,7 +215,6 @@ class _LocationState extends State<Location> {
           ),
         ),
       ),
-      bottomNavigationBar: Bottombar(),
     );
   }
 }
