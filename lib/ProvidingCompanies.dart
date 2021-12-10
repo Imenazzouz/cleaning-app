@@ -16,7 +16,7 @@ class _ChooseCompanyState extends State<ChooseCompany> {
         leading: BackButton(
           color: Colors.white,
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/page1');
           },
         ),
         title: Text(
@@ -97,29 +97,32 @@ class _ProvidedByState extends State<ProvidedBy> {
           itemCount: _listImages.length,
           itemBuilder: (BuildContext Context, int index) {
             return Padding(
-              padding: EdgeInsets.only(bottom: screenSize.height * 0.025),
+              padding: EdgeInsets.symmetric(
+                  horizontal: screenSize.width * 0.15,
+                  vertical: screenSize.height * 0.015),
               child: InkWell(
                 onTap: () {},
                 child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(30)),
                   height: screenSize.height * 0.25,
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          _listImages[index]['image'],
-                          height: screenSize.height * 0.2,
-                          width: screenSize.width * 0.7,
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        _listImages[index]['image'],
+                        height: screenSize.height * 0.2,
+                        width: screenSize.width * 0.7,
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(top: screenSize.height * 0.005),
+                        child: Text(
+                          _listImages[index]['text'],
+                          style: TextStyle(fontFamily: 'Poppins'),
                         ),
-                        Padding(
-                          padding:
-                              EdgeInsets.only(top: screenSize.height * 0.005),
-                          child: Text(
-                            _listImages[index]['text'],
-                            style: TextStyle(fontFamily: 'Poppins'),
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ),
               ),

@@ -193,8 +193,8 @@ class _HomePageState extends State<HomePage> {
                           'Validate',
                           style: TextStyle(
                             color: Colors.white,
-                            fontFamily: 'halter',
-                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontSize: 20,
                             package: 'flutter_credit_card',
                           ),
                         ),

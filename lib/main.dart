@@ -36,8 +36,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Welcome Screen',
       routes: {
-        '/profile' :(context) => WelcomeScreen(),
-        '/home': (context) => ProfilePage(),
+        '/home': (context) => WelcomeScreen(),
+        '/profile': (context) => ProfilePage(),
         '/signin': (context) => Signin(),
         '/signup': (context) => SignUp(),
         '/page2': (context) => Page2(),

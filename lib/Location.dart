@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class Location extends StatefulWidget {
   const Location({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _LocationState extends State<Location> {
         leading: BackButton(
           color: Colors.white,
           onPressed: () {
-            Navigator.pushNamed(context, '/page1');
+            Navigator.pushNamed(context, '/providedby');
           },
         ),
         title: Text(
@@ -59,10 +60,17 @@ class _LocationState extends State<Location> {
             child: Column(
               children: [
                 SizedBox(height: screenSize.height * 0.03),
-                Text(
-                  'Last Name',
-                  style: TextStyle(
-                      fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                SizedBox(width: screenSize.width * 0.5),
+                Padding(
+                  padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                  child: Align(
+                    child: Text(
+                      'Last Name :',
+                      style: TextStyle(
+                          fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                    ),
+                    alignment: Alignment.centerLeft,
+                  ),
                 ),
                 TextField(
                   decoration: InputDecoration(
@@ -82,10 +90,16 @@ class _LocationState extends State<Location> {
                       hintStyle: TextStyle(fontFamily: 'Poppins')),
                 ),
                 SizedBox(height: screenSize.height * 0.03),
-                Text(
-                  'First Name',
-                  style: TextStyle(
-                      fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                Padding(
+                  padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                  child: Align(
+                    child: Text(
+                      'First Name :',
+                      style: TextStyle(
+                          fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                    ),
+                    alignment: Alignment.centerLeft,
+                  ),
                 ),
                 TextField(
                   decoration: InputDecoration(
@@ -105,10 +119,16 @@ class _LocationState extends State<Location> {
                       hintStyle: TextStyle(fontFamily: 'Poppins')),
                 ),
                 SizedBox(height: screenSize.height * 0.03),
-                Text(
-                  'Phone number',
-                  style: TextStyle(
-                      fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                Padding(
+                  padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                  child: Align(
+                    child: Text(
+                      'Phone Number :',
+                      style: TextStyle(
+                          fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                    ),
+                    alignment: Alignment.centerLeft,
+                  ),
                 ),
                 TextField(
                   keyboardType: TextInputType.number,
@@ -129,10 +149,16 @@ class _LocationState extends State<Location> {
                       hintStyle: TextStyle(fontFamily: 'Poppins')),
                 ),
                 SizedBox(height: screenSize.height * 0.03),
-                Text(
-                  'Address',
-                  style: TextStyle(
-                      fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                Padding(
+                  padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                  child: Align(
+                    child: Text(
+                      'Address :',
+                      style: TextStyle(
+                          fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                    ),
+                    alignment: Alignment.centerLeft,
+                  ),
                 ),
                 TextField(
                   keyboardType: TextInputType.streetAddress,
@@ -153,10 +179,16 @@ class _LocationState extends State<Location> {
                       hintStyle: TextStyle(fontFamily: 'Poppins')),
                 ),
                 SizedBox(height: screenSize.height * 0.03),
-                Text(
-                  'Region',
-                  style: TextStyle(
-                      fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                Padding(
+                  padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                  child: Align(
+                    child: Text(
+                      'Region :',
+                      style: TextStyle(
+                          fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                    ),
+                    alignment: Alignment.centerLeft,
+                  ),
                 ),
                 TextField(
                     decoration: InputDecoration(
@@ -176,10 +208,16 @@ class _LocationState extends State<Location> {
                   hintStyle: TextStyle(fontFamily: 'Poppins'),
                 )),
                 SizedBox(height: screenSize.height * 0.03),
-                Text(
-                  'City',
-                  style: TextStyle(
-                      fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                Padding(
+                  padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                  child: Align(
+                    child: Text(
+                      'City :',
+                      style: TextStyle(
+                          fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                    ),
+                    alignment: Alignment.centerLeft,
+                  ),
                 ),
                 TextField(
                     decoration: InputDecoration(
@@ -206,7 +244,11 @@ class _LocationState extends State<Location> {
                     onPressed: () {
                       Navigator.pushNamed(context, '/pay');
                     },
-                    child: Text('Confirm Order'),
+                    child: Text(
+                      'Confirm Order',
+                      style:
+                          TextStyle(color: Colors.white, fontFamily: 'Poppins'),
+                    ),
                   ),
                 ),
                 SizedBox(height: screenSize.height * 0.03),
