@@ -75,6 +75,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: Image.asset(
+
                     item['image'],
                     fit: BoxFit.fitWidth,
                     width: 300.0,

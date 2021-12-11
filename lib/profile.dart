@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
+
 class ButtonWidget extends StatelessWidget {
   final String text;
   final VoidCallback onClicked;
@@ -13,35 +14,36 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
-    style: ElevatedButton.styleFrom(
-      primary:Colors.blueAccent,
-      textStyle:TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-      shape: const StadiumBorder(),
-      onPrimary: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-    ),
-    child: Text(text),
-    onPressed: onClicked,
-  );
+        style: ElevatedButton.styleFrom(
+          primary: Colors.blueAccent,
+          textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          shape: const StadiumBorder(),
+          onPrimary: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+        ),
+        child: Text(text),
+        onPressed: onClicked,
+      );
 }
+
 class NumbersWidget extends StatelessWidget {
   const NumbersWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: <Widget>[
-      buildButton(context, '5', 'Services'),
-      buildDivider(),
-      buildButton(context, '10', 'Following'),
-      buildDivider(),
-      buildButton(context, '150', 'Points'),
-    ],
-  );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          buildButton(context, '5', 'Services'),
+          buildDivider(),
+          buildButton(context, '10', 'Following'),
+          buildDivider(),
+          buildButton(context, '150', 'Points'),
+        ],
+      );
   Widget buildDivider() => const SizedBox(
-    height: 24,
-    child: VerticalDivider(),
-  );
+        height: 24,
+        child: VerticalDivider(),
+      );
 
   Widget buildButton(BuildContext context, String value, String text) =>
       MaterialButton(
@@ -59,7 +61,6 @@ class NumbersWidget extends StatelessWidget {
             const SizedBox(height: 2),
             Text(
               text,
-
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
@@ -113,18 +114,18 @@ class ProfileWidget extends StatelessWidget {
   }
 
   Widget buildEditIcon(Color color) => buildCircle(
-    color: Colors.white,
-    all: 3,
-    child: buildCircle(
-      color: color,
-      all: 8,
-      child: const Icon(
-        Icons.edit,
         color: Colors.white,
-        size: 20,
-      ),
-    ),
-  );
+        all: 3,
+        child: buildCircle(
+          color: color,
+          all: 8,
+          child: const Icon(
+            Icons.edit,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
+      );
 
   Widget buildCircle({
     required Widget child,
@@ -139,6 +140,7 @@ class ProfileWidget extends StatelessWidget {
         ),
       );
 }
+
 class User {
   final String imagePath;
   final String name;
@@ -154,6 +156,7 @@ class User {
     required this.isDarkMode,
   });
 }
+
 AppBar buildAppBar(BuildContext context) {
   final icon = CupertinoIcons.moon_stars;
 
@@ -173,11 +176,10 @@ AppBar buildAppBar(BuildContext context) {
 class UserPreferences {
   static const myUser = User(
     imagePath:
-    'https://scontent.ftun16-1.fna.fbcdn.net/v/t1.6435-9/64580623_1589802191151097_8349125233231265792_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=9Ur2hidDrp0AX9yK2kB&_nc_ht=scontent.ftun16-1.fna&oh=844f750920af9bf784a81e77ce1f0d79&oe=61CF8B17',
+        'https://scontent.ftun16-1.fna.fbcdn.net/v/t1.6435-9/64580623_1589802191151097_8349125233231265792_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=9Ur2hidDrp0AX9yK2kB&_nc_ht=scontent.ftun16-1.fna&oh=844f750920af9bf784a81e77ce1f0d79&oe=61CF8B17',
     name: 'Yesmine Gharbi',
     email: 'Yesmine.Gharbi@supcom.tn',
-    about:
-    '2nd year ICT engineering student.',
+    about: '2nd year ICT engineering student.',
     isDarkMode: false,
   );
 }
@@ -195,25 +197,20 @@ class _ProfilePageState extends State<ProfilePage> {
     final user = UserPreferences.myUser;
 
     return Scaffold(
-      backgroundColor:Colors.blueAccent,
+      backgroundColor: Colors.blueAccent,
       appBar: buildAppBar(context),
-      body:
-      Container(
+      body: Container(
         decoration: const BoxDecoration(
-            color:Colors.white,
-
-            borderRadius:BorderRadius.only(
-              topLeft:Radius.circular(40.0),
-              topRight:Radius.circular(40.0),
-            )
-        ),
-
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40.0),
+              topRight: Radius.circular(40.0),
+            )),
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [
-            const SizedBox(height:18),
+            const SizedBox(height: 18),
             ProfileWidget(
-
               imagePath: user.imagePath,
               onClicked: () async {},
             ),
@@ -232,51 +229,53 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget buildName(User user) => Column(
-    children: [
-      Text(
-        user.name,
-        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-      ),
-      const SizedBox(height: 4),
-      Text(
-        user.email,
-        style: const TextStyle(color: Colors.grey),
-      )
-    ],
-  );
+        children: [
+          Text(
+            user.name,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            user.email,
+            style: const TextStyle(color: Colors.grey),
+          )
+        ],
+      );
 
   Widget buildUpgradeButton() => ButtonWidget(
-    text: 'Disconnect',
-    onClicked: () {},
-  );
+        text: 'Disconnect',
+        onClicked: () {},
+      );
 
   Widget buildAbout(User user) => Container(
-    decoration: const BoxDecoration(
-        color:Colors.blueAccent,
-        borderRadius:BorderRadius.only(
-          topLeft:Radius.circular(20.0),
-          topRight:Radius.circular(20.0),
-          bottomLeft:Radius.circular(20.0),
-          bottomRight:Radius.circular(20.0),
-        )
-    ),
-    margin: EdgeInsets.all(48),
-    padding: const EdgeInsets.symmetric(horizontal: 58),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height:15),
-        const Text(
-          'About:',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
+        decoration: const BoxDecoration(
+            color: Colors.blueAccent,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+              bottomLeft: Radius.circular(20.0),
+              bottomRight: Radius.circular(20.0),
+            )),
+        margin: EdgeInsets.all(48),
+        padding: const EdgeInsets.symmetric(horizontal: 58),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 15),
+            const Text(
+              'About:',
+              style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              user.about,
+              style: const TextStyle(fontSize: 15),
+            ),
+            const SizedBox(height: 15)
+          ],
         ),
-        const SizedBox(height:10),
-        Text(
-          user.about,
-          style: const TextStyle(fontSize: 15),
-        ),
-        const SizedBox(height:15)
-      ],
-    ),
-  );
+      );
 }

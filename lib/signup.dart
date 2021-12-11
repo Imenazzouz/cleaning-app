@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/constant.dart';
 import 'package:myapp/page1.dart';
 import 'package:myapp/page2.dart';
+import 'package:myapp/services/user.dart';
 import 'package:myapp/signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:myapp/services/auth.dart';
@@ -16,10 +17,13 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool _visible = true;
+  TextEditingController _usernameController = TextEditingController();
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   final TextEditingController namecontroller = TextEditingController();
+  TextEditingController _repasswordController = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +50,7 @@ class _SignUpState extends State<SignUp> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 180,
+                        height: 80,
                         width: MediaQuery.of(context).size.width * 0.8,
                         margin: EdgeInsets.only(
                             left: MediaQuery.of(context).size.width * 0.09),
@@ -60,7 +64,46 @@ class _SignUpState extends State<SignUp> {
                         margin: const EdgeInsets.only(
                           left: 20,
                           right: 20,
-                          bottom: 10,
+                          bottom: 1,
+                        ),
+                        child: Text( 'Username',
+                          style: const TextStyle(
+                              color: Colors.blueAccent,
+                              letterSpacing: 0.7,
+                              fontFamily: 'poppins',
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),SizedBox(height: 5),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                          bottom: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(45),
+                          border: Border.all(color: Colors.blueAccent,width: 1.7),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10.0,left: 10),
+                          child: TextField(
+
+                            controller: _usernameController,
+                            keyboardType: TextInputType.text,
+                            decoration: const InputDecoration(
+                              hintText: "   Amouna ta7founa",
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                          bottom: 1,
                         ),
                         child: Text( 'Email',
                           style: const TextStyle(
@@ -71,12 +114,11 @@ class _SignUpState extends State<SignUp> {
                               fontWeight: FontWeight.w600),
                         ),
                       ),SizedBox(height: 5),
-
                       Container(
                         margin: const EdgeInsets.only(
                           left: 20,
                           right: 20,
-                          bottom: 20,
+                          bottom: 5,
                         ),
                         decoration: BoxDecoration(
                           color: Colors.grey[300],
@@ -96,26 +138,28 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ),
+
                       Container(
 
                         margin: const EdgeInsets.only(
                           left: 20,
                           right: 20,
-                          bottom: 10,
+                          bottom:5 ,
                         ),
                         child: Text( 'Password',
                           style: const TextStyle(
                               color: Colors.blueAccent,
                               letterSpacing: 0.7,
                               fontFamily: 'poppins',
-                              fontSize: 18,
+                              fontSize: 15,
                               fontWeight: FontWeight.w600),
                         ),
-                      ),SizedBox(height: 5),
+                      ),
                       Container( margin: const EdgeInsets.only(
                         left: 20,
                         right: 20,
-                        bottom: 20,
+                        bottom: 5
+                        ,
                       ),
                         decoration: BoxDecoration(
                           color: Colors.grey[300],
@@ -143,6 +187,60 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ),
+
+
+                      Container(
+
+                        margin: const EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                          bottom:5 ,
+                        ),
+                        child: Text( 'Password',
+                          style: const TextStyle(
+                              color: Colors.blueAccent,
+                              letterSpacing: 0.7,
+                              fontFamily: 'poppins',
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),SizedBox(height: 5),
+                      Container( margin: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 5
+                        ,
+                      ),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(45),
+                          border: Border.all(color: Colors.blueAccent, width: 1.7),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 10.0,left: 10),
+                          child: TextField(
+                            obscureText: _visible,
+                            controller:  _repasswordController,
+                            decoration: InputDecoration(
+
+                              suffixIcon: IconButton(
+                                  icon: Icon(
+                                      _visible ? Icons.visibility : Icons.visibility_off),
+                                  onPressed: () {
+                                    setState(() {
+                                      _visible = !_visible;
+                                    });
+                                  }),
+                              hintText: "   minumum 8 characters",
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ),
+
+
+
+
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -193,6 +291,7 @@ class _SignUpState extends State<SignUp> {
                                 height: 65.0,
 
                                 onPressed: () {
+
                                AuthenticationHelper()
                                   .signUp(email: emailcontroller.text,
                                   password: passwordcontroller.text)
@@ -201,15 +300,17 @@ class _SignUpState extends State<SignUp> {
                                    Navigator.pushReplacement(context,
                                   MaterialPageRoute(builder: (context) => Signin()));
                                    } else {
-    Scaffold.of(context).showSnackBar(SnackBar(
-    content: Text(
-    result,
-    style: TextStyle(fontSize: 16),
-    ),
-    ));
-    }
+                                     Scaffold.of(context).showSnackBar(SnackBar(
+                                       content: Text(
+                                         result,
+                                         style: TextStyle(fontSize: 16),
+                                       ),
+                                     ));
 
 
+
+                                   }
+                                   userSetup(_usernameController.text,emailcontroller.text);
                                   });
                                 },
                               ),
@@ -220,32 +321,8 @@ class _SignUpState extends State<SignUp> {
                       Container(
                         margin: EdgeInsets.only(
                             left: MediaQuery.of(context).size.width * 0.149,
-                            top: MediaQuery.of(context).size.height * 0.08),
-                        child: Text.rich(
-                          TextSpan(
-                              text: "Don't already Have an account? ",
-                              style: TextStyle(
-                                  letterSpacing: 0.7,
-                                  fontFamily: 'poppins',
-                                  color: blackshade,
-                                  fontSize: 12),
-                              children: [
-                                TextSpan(
-                                    text: "Sign Up",
-                                    style: TextStyle(
-                                        color: blue,
-                                        fontSize: 16,
-                                        fontFamily: 'poppins'),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => SignUp()));
-                                        print("Sign Up click");
-                                      }),
-                              ]),
-                        ),
+                            top: MediaQuery.of(context).size.height * 0.07),
+
                       ),
                     ],
                   ),
@@ -336,7 +413,7 @@ class InputField extends StatelessWidget {
           margin: const EdgeInsets.only(
             left: 20,
             right: 20,
-            bottom: 10,
+            bottom: 0,
           ),
           child: Text(
             headerText,
@@ -399,7 +476,7 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
           margin: const EdgeInsets.only(
             left: 20,
             right: 20,
-            bottom: 10,
+            bottom: 0,
           ),
           child: Text(
             widget.headerText,
