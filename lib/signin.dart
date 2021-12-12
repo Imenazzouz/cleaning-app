@@ -25,6 +25,7 @@ class _SigninState extends State<Signin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
           child: Stack(
         children: [
@@ -185,9 +186,7 @@ class _SigninState extends State<Signin> {
                                 borderRadius: BorderRadius.circular(30)),
                             textColor: Colors.black,
                             height: 65.0,
-                            onPressed: ()  {
-
-                              
+                            onPressed: () {
                               AuthenticationHelper()
                                   .signIn(
                                       email: emailcontroller.text,

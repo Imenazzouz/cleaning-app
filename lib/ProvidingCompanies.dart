@@ -56,6 +56,7 @@ class ProvidedBy extends StatefulWidget {
 }
 
 class _ProvidedByState extends State<ProvidedBy> {
+  int selectedIndex = 0;
   List _listImages = [
     {
       'image': "assets/lg.png",
@@ -101,12 +102,16 @@ class _ProvidedByState extends State<ProvidedBy> {
                   horizontal: screenSize.width * 0.15,
                   vertical: screenSize.height * 0.015),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
                 child: Container(
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.blue),
                       borderRadius: BorderRadius.circular(30)),
-                  height: screenSize.height * 0.25,
+                  height: screenSize.height * 0.28,
                   child: Column(
                     children: [
                       Image.asset(
@@ -121,7 +126,11 @@ class _ProvidedByState extends State<ProvidedBy> {
                           _listImages[index]['text'],
                           style: TextStyle(fontFamily: 'Poppins'),
                         ),
-                      )
+                      ),
+                      Icon(Icons.check_circle_outlined,
+                          color: selectedIndex == index
+                              ? Colors.green
+                              : Colors.grey),
                     ],
                   ),
                 ),

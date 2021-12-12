@@ -26,310 +26,302 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    final bottom = MediaQuery.of(context).viewInsets.bottom;
+
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
           child: Stack(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                color: blue,
-              ),
-              const TopSginup(),
-              Positioned(
-                top: MediaQuery.of(context).size.height * 0.09,
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.9,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      color: whiteshade,
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(45),
-                          topRight: Radius.circular(45))),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 80,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.09),
-                        child: Image.asset("assets/h.jpg"),
-                      ),
-
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          bottom: 1,
-                        ),
-                        child: Text( 'Username',
-                          style: const TextStyle(
-                              color: Colors.blueAccent,
-                              letterSpacing: 0.7,
-                              fontFamily: 'poppins',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),SizedBox(height: 5),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          bottom: 5,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(45),
-                          border: Border.all(color: Colors.blueAccent,width: 1.7),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 10.0,left: 10),
-                          child: TextField(
-
-                            controller: _usernameController,
-                            keyboardType: TextInputType.text,
-                            decoration: const InputDecoration(
-                              hintText: "   Amouna ta7founa",
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          bottom: 1,
-                        ),
-                        child: Text( 'Email',
-                          style: const TextStyle(
-                              color: Colors.blueAccent,
-                              letterSpacing: 0.7,
-                              fontFamily: 'poppins',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),SizedBox(height: 5),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          bottom: 5,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(45),
-                          border: Border.all(color: Colors.blueAccent,width: 1.7),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 10.0,left: 10),
-                          child: TextField(
-
-                            controller: emailcontroller,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: const InputDecoration(
-                              hintText: "   salah@gmail.com",
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      Container(
-
-                        margin: const EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          bottom:5 ,
-                        ),
-                        child: Text( 'Password',
-                          style: const TextStyle(
-                              color: Colors.blueAccent,
-                              letterSpacing: 0.7,
-                              fontFamily: 'poppins',
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Container( margin: const EdgeInsets.only(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: blue,
+          ),
+          const TopSginup(),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.09,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.9,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  color: whiteshade,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(45),
+                      topRight: Radius.circular(45))),
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(bottom: bottom),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 80,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.09),
+                      child: Image.asset("assets/h.jpg"),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
                         left: 20,
                         right: 20,
-                        bottom: 5
-                        ,
+                        bottom: 1,
                       ),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(45),
-                          border: Border.all(color: Colors.blueAccent, width: 1.7),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 10.0,left: 10),
-                          child: TextField(
-                            obscureText: _visible,
-                            controller: passwordcontroller,
-                            decoration: InputDecoration(
-
-                              suffixIcon: IconButton(
-                                  icon: Icon(
-                                      _visible ? Icons.visibility : Icons.visibility_off),
-                                  onPressed: () {
-                                    setState(() {
-                                      _visible = !_visible;
-                                    });
-                                  }),
-                              hintText: "   minumum 8 characters",
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
+                      child: Text(
+                        'Username',
+                        style: const TextStyle(
+                            color: Colors.blueAccent,
+                            letterSpacing: 0.7,
+                            fontFamily: 'poppins',
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
                       ),
-
-
-                      Container(
-
-                        margin: const EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          bottom:5 ,
-                        ),
-                        child: Text( 'Password',
-                          style: const TextStyle(
-                              color: Colors.blueAccent,
-                              letterSpacing: 0.7,
-                              fontFamily: 'poppins',
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),SizedBox(height: 5),
-                      Container( margin: const EdgeInsets.only(
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      margin: const EdgeInsets.only(
                         left: 20,
                         right: 20,
-                        bottom: 5
-                        ,
+                        bottom: 5,
                       ),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(45),
-                          border: Border.all(color: Colors.blueAccent, width: 1.7),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 10.0,left: 10),
-                          child: TextField(
-                            obscureText: _visible,
-                            controller:  _repasswordController,
-                            decoration: InputDecoration(
-
-                              suffixIcon: IconButton(
-                                  icon: Icon(
-                                      _visible ? Icons.visibility : Icons.visibility_off),
-                                  onPressed: () {
-                                    setState(() {
-                                      _visible = !_visible;
-                                    });
-                                  }),
-                              hintText: "   minumum 8 characters",
-                              border: InputBorder.none,
-                            ),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(45),
+                        border:
+                            Border.all(color: Colors.blueAccent, width: 1.7),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 10.0, left: 10),
+                        child: TextField(
+                          controller: _usernameController,
+                          keyboardType: TextInputType.text,
+                          decoration: const InputDecoration(
+                            hintText: "   Amouna ta7founa",
+                            border: InputBorder.none,
                           ),
                         ),
                       ),
-
-
-
-
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const CheckerBox(),
-
-                        ],
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 1,
                       ),
-                      InkWell(
-                        onTap: ()  {
-
-                        },
-
-
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.07,
-                          margin: const EdgeInsets.only(left: 20, right: 20),
-                          decoration: BoxDecoration(
-                              color: blue,
-                              borderRadius:
-                              const BorderRadius.all(Radius.circular(30))),
-                          child: Center(
-
-                            child:  Container(
-                              width: 300,
-                              decoration: BoxDecoration(
-
-                                  color: Colors.blueAccent,
-                                  borderRadius:
-                                  const BorderRadius.all(Radius.circular(30))),
-                              child: FlatButton(
-
-
-                                child: const Text(
-                                  'Sign up ',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 22,
-                                      fontFamily: 'poppins',
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: 1),
-                                ),
-
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                                textColor: Colors.black,
-                                height: 65.0,
-
+                      child: Text(
+                        'Email',
+                        style: const TextStyle(
+                            color: Colors.blueAccent,
+                            letterSpacing: 0.7,
+                            fontFamily: 'poppins',
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(45),
+                        border:
+                            Border.all(color: Colors.blueAccent, width: 1.7),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 10.0, left: 10),
+                        child: TextField(
+                          controller: emailcontroller,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: const InputDecoration(
+                            hintText: "   salah@gmail.com",
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 5,
+                      ),
+                      child: Text(
+                        'Password',
+                        style: const TextStyle(
+                            color: Colors.blueAccent,
+                            letterSpacing: 0.7,
+                            fontFamily: 'poppins',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(45),
+                        border:
+                            Border.all(color: Colors.blueAccent, width: 1.7),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 10.0, left: 10),
+                        child: TextField(
+                          obscureText: _visible,
+                          controller: passwordcontroller,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                icon: Icon(_visible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
                                 onPressed: () {
-
-                               AuthenticationHelper()
-                                  .signUp(email: emailcontroller.text,
-                                  password: passwordcontroller.text)
-                                 .then((result) {
-                                   if (result == null) {
-                                   Navigator.pushReplacement(context,
-                                  MaterialPageRoute(builder: (context) => Signin()));
-                                   } else {
-                                     Scaffold.of(context).showSnackBar(SnackBar(
-                                       content: Text(
-                                         result,
-                                         style: TextStyle(fontSize: 16),
-                                       ),
-                                     ));
-
-
-
-                                   }
-                                   userSetup(_usernameController.text,emailcontroller.text);
+                                  setState(() {
+                                    _visible = !_visible;
                                   });
-                                },
+                                }),
+                            hintText: "   minumum 8 characters",
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 5,
+                      ),
+                      child: Text(
+                        'Password',
+                        style: const TextStyle(
+                            color: Colors.blueAccent,
+                            letterSpacing: 0.7,
+                            fontFamily: 'poppins',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(45),
+                        border:
+                            Border.all(color: Colors.blueAccent, width: 1.7),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 10.0, left: 10),
+                        child: TextField(
+                          obscureText: _visible,
+                          controller: _repasswordController,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                icon: Icon(_visible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                                onPressed: () {
+                                  setState(() {
+                                    _visible = !_visible;
+                                  });
+                                }),
+                            hintText: "   minumum 8 characters",
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const CheckerBox(),
+                      ],
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.07,
+                        margin: const EdgeInsets.only(left: 20, right: 20),
+                        decoration: BoxDecoration(
+                            color: blue,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30))),
+                        child: Center(
+                          child: Container(
+                            width: 300,
+                            decoration: BoxDecoration(
+                                color: Colors.blueAccent,
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(30))),
+                            child: FlatButton(
+                              child: const Text(
+                                'Sign up ',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontFamily: 'poppins',
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 1),
                               ),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              textColor: Colors.black,
+                              height: 65.0,
+                              onPressed: () {
+                                AuthenticationHelper()
+                                    .signUp(
+                                        email: emailcontroller.text,
+                                        password: passwordcontroller.text)
+                                    .then((result) {
+                                  if (result == null) {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Signin()));
+                                  } else {
+                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text(
+                                        result,
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ));
+                                  }
+                                  userSetup(_usernameController.text,
+                                      emailcontroller.text);
+                                });
+                              },
                             ),
                           ),
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.149,
-                            top: MediaQuery.of(context).size.height * 0.07),
-
-                      ),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.149,
+                          top: MediaQuery.of(context).size.height * 0.07),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          )),
+            ),
+          ),
+        ],
+      )),
     );
   }
 }
