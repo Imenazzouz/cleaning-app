@@ -4,6 +4,7 @@ import 'package:myapp/Profile.dart';
 import 'package:myapp/Services.dart';
 import 'package:myapp/companies.dart';
 import 'package:myapp/nard.dart';
+import 'package:myapp/services/user-data-model.dart';
 import 'ProvidingCompanies.dart';
 
 class Page1 extends StatefulWidget {
@@ -18,7 +19,7 @@ class _Page1State extends State<Page1> {
   static const _kDuration = const Duration(milliseconds: 300);
   static const _kCurve = Curves.ease;
   int currentIndex = 0;
-  final screens = [Services(), ProfilePage(), Location()];
+  final screens = [Location(),Services(), Profile(), ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +38,10 @@ class _Page1State extends State<Page1> {
         backgroundColor: Colors.blue[500],
         showUnselectedLabels: false,
         items: [
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'history'),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'profile'),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'history'),
+
         ],
       ),
     );

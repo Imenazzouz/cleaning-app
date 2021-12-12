@@ -5,6 +5,7 @@ import 'package:myapp/main.dart';
 import 'package:myapp/page1.dart';
 import 'package:myapp/page2.dart';
 import 'package:myapp/profile.dart';
+import 'package:myapp/services/user-data-model.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _NavbarState extends State<Navbar> {
   int _selectedIndex = 0;
    int _currentIndex = 0;
   static const List<Widget> _options = <Widget>[
-    Companies(), Page1(),ProfilePage()];
+    Companies(), Page1(),Profile()];
   void _onItemTap(int index) {
     setState(() {
       int _currentIndex = 0;

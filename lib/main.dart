@@ -13,6 +13,7 @@ import 'package:myapp/page2.dart';
 import 'package:myapp/pay.dart';
 import 'package:myapp/profile.dart';
 import 'package:myapp/services/auth.dart';
+import 'package:myapp/services/user-data-model.dart';
 import 'package:myapp/signin.dart';
 import 'package:myapp/signup.dart';
 import 'package:myapp/splash.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       title: 'Welcome Screen',
       routes: {
         '/home': (context) => WelcomeScreen(),
-        '/profile': (context) => ProfilePage(),
+        '/profile': (context) => Profile(),
         '/signin': (context) => Signin(),
         '/signup': (context) => SignUp(),
         '/page2': (context) => Page2(),
@@ -68,7 +69,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: 100.0,
+                height: 90.0,
               ),
               Flexible(
                 flex: 0,
@@ -181,7 +182,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.07,
-              margin: const EdgeInsets.only(left: 20, right: 20, top: 600.0),
+              margin: const EdgeInsets.only(left: 20, right: 20, top: 500.0),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: const BorderRadius.all(Radius.circular(30))),
