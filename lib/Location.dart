@@ -9,10 +9,10 @@ class Location extends StatefulWidget {
 }
 
 class _LocationState extends State<Location> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
       backgroundColor: Colors.blue,
       appBar: AppBar(
@@ -57,169 +57,33 @@ class _LocationState extends State<Location> {
                 topRight: const Radius.circular(40.0),
               ),
             ),
-            child: Column(
-              children: [
-                SizedBox(height: screenSize.height * 0.03),
-                SizedBox(width: screenSize.width * 0.5),
-                Padding(
-                  padding: EdgeInsets.only(left: screenSize.width * 0.05),
-                  child: Align(
-                    child: Text(
-                      'Last Name :',
-                      style: TextStyle(
-                          fontFamily: 'Poppins', fontWeight: FontWeight.w600),
-                    ),
-                    alignment: Alignment.centerLeft,
-                  ),
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  SizedBox(height: screenSize.height * 0.03),
+                  SizedBox(width: screenSize.width * 0.5),
+                  Padding(
+                    padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                    child: Align(
+                      child: Text(
+                        'Last Name :',
+                        style: TextStyle(
+                            fontFamily: 'Poppins', fontWeight: FontWeight.w600),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      hintText: 'Enter your last name',
-                      hintStyle: TextStyle(fontFamily: 'Poppins')),
-                ),
-                SizedBox(height: screenSize.height * 0.03),
-                Padding(
-                  padding: EdgeInsets.only(left: screenSize.width * 0.05),
-                  child: Align(
-                    child: Text(
-                      'First Name :',
-                      style: TextStyle(
-                          fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                      alignment: Alignment.centerLeft,
                     ),
-                    alignment: Alignment.centerLeft,
                   ),
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      hintText: 'Enter your first name',
-                      hintStyle: TextStyle(fontFamily: 'Poppins')),
-                ),
-                SizedBox(height: screenSize.height * 0.03),
-                Padding(
-                  padding: EdgeInsets.only(left: screenSize.width * 0.05),
-                  child: Align(
-                    child: Text(
-                      'Phone Number :',
-                      style: TextStyle(
-                          fontFamily: 'Poppins', fontWeight: FontWeight.w600),
-                    ),
-                    alignment: Alignment.centerLeft,
-                  ),
-                ),
-                TextField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      hintText: 'Enter your phone number',
-                      hintStyle: TextStyle(fontFamily: 'Poppins')),
-                ),
-                SizedBox(height: screenSize.height * 0.03),
-                Padding(
-                  padding: EdgeInsets.only(left: screenSize.width * 0.05),
-                  child: Align(
-                    child: Text(
-                      'Address :',
-                      style: TextStyle(
-                          fontFamily: 'Poppins', fontWeight: FontWeight.w600),
-                    ),
-                    alignment: Alignment.centerLeft,
-                  ),
-                ),
-                TextField(
-                  keyboardType: TextInputType.streetAddress,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.blue,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      hintText: 'Enter your address',
-                      hintStyle: TextStyle(fontFamily: 'Poppins')),
-                ),
-                SizedBox(height: screenSize.height * 0.03),
-                Padding(
-                  padding: EdgeInsets.only(left: screenSize.width * 0.05),
-                  child: Align(
-                    child: Text(
-                      'Region :',
-                      style: TextStyle(
-                          fontFamily: 'Poppins', fontWeight: FontWeight.w600),
-                    ),
-                    alignment: Alignment.centerLeft,
-                  ),
-                ),
-                TextField(
-                    decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                    ),
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.blue,
-                    ),
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  hintText: 'Enter your Region',
-                  hintStyle: TextStyle(fontFamily: 'Poppins'),
-                )),
-                SizedBox(height: screenSize.height * 0.03),
-                Padding(
-                  padding: EdgeInsets.only(left: screenSize.width * 0.05),
-                  child: Align(
-                    child: Text(
-                      'City :',
-                      style: TextStyle(
-                          fontFamily: 'Poppins', fontWeight: FontWeight.w600),
-                    ),
-                    alignment: Alignment.centerLeft,
-                  ),
-                ),
-                TextField(
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'please enter some text';
+                      }
+                      if (value.length < 3) {
+                        return 'Last name must be composed at least of two charachters';
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -233,26 +97,254 @@ class _LocationState extends State<Location> {
                           ),
                           borderRadius: BorderRadius.circular(30.0),
                         ),
-                        hintText: 'Enter your last city',
-                        hintStyle: TextStyle(fontFamily: 'Poppins'))),
-                SizedBox(height: screenSize.height * 0.03),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.blueAccent),
-                  child: FlatButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/pay');
-                    },
-                    child: Text(
-                      'Confirm Order',
-                      style:
-                          TextStyle(color: Colors.white, fontFamily: 'Poppins'),
+                        errorStyle: TextStyle(fontFamily: 'Poppins'),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        hintText: 'Enter your last name',
+                        hintStyle: TextStyle(fontFamily: 'Poppins')),
+                  ),
+                  SizedBox(height: screenSize.height * 0.03),
+                  Padding(
+                    padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                    child: Align(
+                      child: Text(
+                        'First Name :',
+                        style: TextStyle(
+                            fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                      ),
+                      alignment: Alignment.centerLeft,
                     ),
                   ),
-                ),
-                SizedBox(height: screenSize.height * 0.03),
-              ],
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'please enter some text';
+                      }
+                      if (value.length < 3) {
+                        return 'Your first name must contain at least 3 charachters';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blue,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        errorStyle: TextStyle(fontFamily: 'Poppins'),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        hintText: 'Enter your first name',
+                        hintStyle: TextStyle(fontFamily: 'Poppins')),
+                  ),
+                  SizedBox(height: screenSize.height * 0.03),
+                  Padding(
+                    padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                    child: Align(
+                      child: Text(
+                        'Phone Number :',
+                        style: TextStyle(
+                            fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                      ),
+                      alignment: Alignment.centerLeft,
+                    ),
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'please enter some text';
+                      }
+                      if (value.length != 8) {
+                        return 'Invalid phone number';
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blue,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        errorStyle: TextStyle(fontFamily: 'Poppins'),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        hintText: 'Enter your phone number',
+                        hintStyle: TextStyle(fontFamily: 'Poppins')),
+                  ),
+                  SizedBox(height: screenSize.height * 0.03),
+                  Padding(
+                    padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                    child: Align(
+                      child: Text(
+                        'Address :',
+                        style: TextStyle(
+                            fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                      ),
+                      alignment: Alignment.centerLeft,
+                    ),
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please provide a valid address';
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.streetAddress,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blue,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        errorStyle: TextStyle(fontFamily: 'Poppins'),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        hintText: 'Enter your address',
+                        hintStyle: TextStyle(fontFamily: 'Poppins')),
+                  ),
+                  SizedBox(height: screenSize.height * 0.03),
+                  Padding(
+                    padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                    child: Align(
+                      child: Text(
+                        'Region :',
+                        style: TextStyle(
+                            fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                      ),
+                      alignment: Alignment.centerLeft,
+                    ),
+                  ),
+                  TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'please enter some text';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blue,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        errorStyle: TextStyle(fontFamily: 'Poppins'),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        hintText: 'Enter your Region',
+                        hintStyle: TextStyle(fontFamily: 'Poppins'),
+                      )),
+                  SizedBox(height: screenSize.height * 0.03),
+                  Padding(
+                    padding: EdgeInsets.only(left: screenSize.width * 0.05),
+                    child: Align(
+                      child: Text(
+                        'City :',
+                        style: TextStyle(
+                            fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                      ),
+                      alignment: Alignment.centerLeft,
+                    ),
+                  ),
+                  TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'please enter some text';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          errorStyle: TextStyle(fontFamily: 'Poppins'),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          hintText: 'Enter your city',
+                          hintStyle: TextStyle(fontFamily: 'Poppins'))),
+                  SizedBox(height: screenSize.height * 0.03),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.blueAccent),
+                    child: FlatButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.pushNamed(context, '/pay');
+                        }
+                      },
+                      child: Text(
+                        'Confirm Order',
+                        style: TextStyle(
+                            color: Colors.white, fontFamily: 'Poppins'),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: screenSize.height * 0.03),
+                ],
+              ),
             ),
           ),
         ),
