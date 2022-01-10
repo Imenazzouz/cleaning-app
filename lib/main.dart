@@ -19,6 +19,7 @@ import 'package:myapp/splash.dart';
 import 'package:myapp/Location.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:myapp/companies.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +50,6 @@ class MyApp extends StatelessWidget {
         '/page1': (context) => Page1(),
         '/pay': (context) => Pay(),
         '/location': (context) => Location(),
-        '/companies': (context) => Companies(),
         '/providedby': (context) => ChooseCompany()
       },
     );
@@ -61,7 +61,28 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation animation;
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(duration: Duration(seconds: 1), vsync: this);
+    controller.forward();
+    animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
+    controller.addListener(() {
+      setState(() {});
+      _pageViewController.addListener(() {
+        setState(() {
+          currentPage = _pageViewController.page!;
+        });
+      });
+    });
+  }
+
+  @override
   List<Widget> slides = items
       .map((item) => Container(
           padding: EdgeInsets.symmetric(horizontal: 18.0),
@@ -75,7 +96,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: Image.asset(
-
                     item['image'],
                     fit: BoxFit.fitWidth,
                     width: 300.0,
@@ -92,7 +112,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     children: <Widget>[
                       Text(item['header'],
                           style: TextStyle(
-                              fontSize: 40.0,
+                              fontSize: 40,
                               fontWeight: FontWeight.w600,
                               fontFamily: 'Poppins',
                               letterSpacing: 2.0,
@@ -141,74 +161,62 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   final _pageViewController = new PageController();
 
   @override
-  void initState() {
-    super.initState();
-    _pageViewController.addListener(() {
-      setState(() {
-        currentPage = _pageViewController.page!;
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
-      body: Container(
-        child: Stack(
-          children: <Widget>[
-            PageView.builder(
-              controller: _pageViewController,
-              itemCount: slides.length,
-              itemBuilder: (BuildContext context, int index) {
-                return slides[index];
-              },
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                margin: EdgeInsets.only(top: 10.0),
-                padding: EdgeInsets.symmetric(vertical: 20.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: indicator(),
-                  ),
+      body: Stack(
+        children: <Widget>[
+          PageView.builder(
+            controller: _pageViewController,
+            itemCount: slides.length,
+            itemBuilder: (BuildContext context, int index) {
+              return slides[index];
+            },
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: EdgeInsets.only(top: 10.0),
+              padding: EdgeInsets.symmetric(vertical: 20.0),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: indicator(),
                 ),
               ),
             ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.07,
-              margin: const EdgeInsets.only(left: 20, right: 20, top: 600.0),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.all(Radius.circular(30))),
-              child: Center(
-                child: FlatButton(
-                  child: Text(
-                    'Get Started !',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontFamily: 'poppins',
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1),
-                  ),
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  textColor: Colors.black,
-                  height: 45.0,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/signin');
-                  },
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.07,
+            margin: const EdgeInsets.only(left: 20, right: 20, top: 600.0),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.all(Radius.circular(30))),
+            child: Center(
+              child: FlatButton(
+                child: Text(
+                  'Get Started !',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontFamily: 'poppins',
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1),
                 ),
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                textColor: Colors.black,
+                height: 45.0,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/signin');
+                },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

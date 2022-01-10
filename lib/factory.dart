@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/nard.dart';
@@ -372,17 +373,26 @@ class _ServicePickState extends State<ServicePick> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(
-                          'pick your services',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.blueGrey,
-                              fontFamily: 'Poppins'),
+                        AnimatedTextKit(
+                          animatedTexts: [
+                            WavyAnimatedText('Pick your services',
+                                textStyle: TextStyle(
+                                    fontSize: 15.0,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 1.0,
+                                    color: Colors.blue),
+                                speed: Duration(milliseconds: 100))
+                          ],
+                          isRepeatingAnimation: false,
                         ),
-                        Image.asset(
-                          'assets/3.jpg',
-                          height: 140,
-                          width: 170,
+                        Hero(
+                          tag: 'factory',
+                          child: Image.asset(
+                            'assets/3.jpg',
+                            height: 140,
+                            width: 170,
+                          ),
                         )
                       ]),
                   FlatButton(

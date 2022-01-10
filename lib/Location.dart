@@ -97,6 +97,12 @@ class _LocationState extends State<Location> {
                           ),
                           borderRadius: BorderRadius.circular(30.0),
                         ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
                         errorStyle: TextStyle(fontFamily: 'Poppins'),
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -139,6 +145,12 @@ class _LocationState extends State<Location> {
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.blue,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
                           ),
                           borderRadius: BorderRadius.circular(30.0),
                         ),
@@ -188,6 +200,12 @@ class _LocationState extends State<Location> {
                           ),
                           borderRadius: BorderRadius.circular(30.0),
                         ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
                         errorStyle: TextStyle(fontFamily: 'Poppins'),
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -228,6 +246,12 @@ class _LocationState extends State<Location> {
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.blue,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
                           ),
                           borderRadius: BorderRadius.circular(30.0),
                         ),
@@ -273,6 +297,12 @@ class _LocationState extends State<Location> {
                           ),
                           borderRadius: BorderRadius.circular(30.0),
                         ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.red,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
                         errorStyle: TextStyle(fontFamily: 'Poppins'),
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -312,6 +342,12 @@ class _LocationState extends State<Location> {
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.blue,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.red,
                             ),
                             borderRadius: BorderRadius.circular(30.0),
                           ),

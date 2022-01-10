@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/Profile.dart';
 import 'package:myapp/companies.dart';
@@ -20,7 +21,7 @@ class _ServicesState extends State<Services> {
       backgroundColor: Colors.blue,
       appBar: AppBar(
         title: Text(
-          'Cleaning master',
+          'Clean master',
           style: TextStyle(
               fontSize: 17.0,
               fontFamily: 'Poppins',
@@ -56,28 +57,33 @@ class _ServicesState extends State<Services> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 10.0, bottom: 10),
-                child: Text(
-                  'Heyy  !',
-                  style: TextStyle(
-                      fontSize: 17.0,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.0,
-                      color: Colors.black),
+                child: AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText('Welcome to Clean Master',
+                        textStyle: TextStyle(
+                            fontSize: 20.0,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1.0,
+                            color: Colors.black),
+                        speed: const Duration(milliseconds: 200)),
+                  ],
+                  isRepeatingAnimation: false,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 0.0, 150.0, 50.0),
                 child: Container(
-                  child: Text(
-                    'Pick a service please',
-                    style: TextStyle(
-                        fontSize: 15.0,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1.0,
-                        color: Colors.grey),
-                  ),
+                  child: AnimatedTextKit(animatedTexts: [
+                    TypewriterAnimatedText('Pick a service please',
+                        textStyle: TextStyle(
+                            fontSize: 15.0,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1.0,
+                            color: Colors.grey),
+                        speed: const Duration(milliseconds: 200)),
+                  ]),
                 ),
               ),
               Row(
@@ -95,11 +101,14 @@ class _ServicesState extends State<Services> {
                             )),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset(
-                            'assets/6.jpg',
-                            fit: BoxFit.fill,
-                            width: 220.0,
-                            height: 115.0,
+                          child: Hero(
+                            tag: 'company',
+                            child: Image.asset(
+                              'assets/6.jpg',
+                              fit: BoxFit.fill,
+                              width: 220.0,
+                              height: 115.0,
+                            ),
                           ),
                         ),
                       ),
@@ -120,11 +129,14 @@ class _ServicesState extends State<Services> {
                             )),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset(
-                            'assets/5.jpg',
-                            fit: BoxFit.fill,
-                            width: 250.0,
-                            height: 115.0,
+                          child: Hero(
+                            tag: 'hospital',
+                            child: Image.asset(
+                              'assets/5.jpg',
+                              fit: BoxFit.fill,
+                              width: 250.0,
+                              height: 115.0,
+                            ),
                           ),
                         ),
                       ),
@@ -186,11 +198,14 @@ class _ServicesState extends State<Services> {
                             )),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset(
-                            'assets/4.jpg',
-                            fit: BoxFit.fill,
-                            width: 250.0,
-                            height: 115.0,
+                          child: Hero(
+                            tag: 'home',
+                            child: Image.asset(
+                              'assets/4.jpg',
+                              fit: BoxFit.fill,
+                              width: 250.0,
+                              height: 115.0,
+                            ),
                           ),
                         ),
                       ),
@@ -211,11 +226,14 @@ class _ServicesState extends State<Services> {
                             )),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset(
-                            'assets/3.jpg',
-                            fit: BoxFit.fill,
-                            width: 250.0,
-                            height: 115.0,
+                          child: Hero(
+                            tag: 'factory',
+                            child: Image.asset(
+                              'assets/3.jpg',
+                              fit: BoxFit.fill,
+                              width: 250.0,
+                              height: 115.0,
+                            ),
                           ),
                         ),
                       ),
@@ -266,11 +284,14 @@ class _ServicesState extends State<Services> {
                             )),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset(
-                            'assets/2.jpg',
-                            fit: BoxFit.fill,
-                            width: 250.0,
-                            height: 115.0,
+                          child: Hero(
+                            tag: 'restaurant',
+                            child: Image.asset(
+                              'assets/2.jpg',
+                              fit: BoxFit.fill,
+                              width: 250.0,
+                              height: 115.0,
+                            ),
                           ),
                         ),
                       ),
@@ -291,11 +312,14 @@ class _ServicesState extends State<Services> {
                             )),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset(
-                            'assets/1.jpg',
-                            fit: BoxFit.fill,
-                            width: 250.0,
-                            height: 115.0,
+                          child: Hero(
+                            tag: 'hotel',
+                            child: Image.asset(
+                              'assets/1.jpg',
+                              fit: BoxFit.fill,
+                              width: 250.0,
+                              height: 115.0,
+                            ),
                           ),
                         ),
                       ),
