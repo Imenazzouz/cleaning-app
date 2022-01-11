@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:myapp/ProvidingCompanies.dart';
+import 'package:myapp/Services.dart';
+
+final _firestore = FirebaseFirestore.instance;
+late User loggedInUser;
 
 class Location extends StatefulWidget {
   const Location({Key? key}) : super(key: key);
@@ -9,8 +16,22 @@ class Location extends StatefulWidget {
 }
 
 class _LocationState extends State<Location> {
+  final _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
   @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async {
+    final user = await _auth.currentUser;
+    if (user != null) {
+      loggedInUser = user;
+      print(loggedInUser.email);
+    }
+  }
+
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
@@ -19,6 +40,14 @@ class _LocationState extends State<Location> {
         leading: BackButton(
           color: Colors.white,
           onPressed: () {
+            _firestore.collection('reservation').doc(docId).update({
+              'company': FieldValue.delete(),
+              'lastName': FieldValue.delete(),
+              'phoneNumber': FieldValue.delete(),
+              'address': FieldValue.delete(),
+              'region': FieldValue.delete(),
+              'city': FieldValue.delete()
+            });
             Navigator.pushNamed(context, '/providedby');
           },
         ),
@@ -82,6 +111,9 @@ class _LocationState extends State<Location> {
                       if (value.length < 3) {
                         return 'Last name must be composed at least of two charachters';
                       }
+                      _firestore.collection('reservation').doc(docId).set(
+                          {'lastName': '${value}'}, SetOptions(merge: true));
+
                       return null;
                     },
                     decoration: InputDecoration(
@@ -133,6 +165,8 @@ class _LocationState extends State<Location> {
                       if (value.length < 3) {
                         return 'Your first name must contain at least 3 charachters';
                       }
+                      _firestore.collection('reservation').doc(docId).set(
+                          {'firstName': '${value}'}, SetOptions(merge: true));
                       return null;
                     },
                     decoration: InputDecoration(
@@ -184,6 +218,8 @@ class _LocationState extends State<Location> {
                       if (value.length != 8) {
                         return 'Invalid phone number';
                       }
+                      _firestore.collection('reservation').doc(docId).set(
+                          {'phoneNumber': '${value}'}, SetOptions(merge: true));
                       return null;
                     },
                     keyboardType: TextInputType.number,
@@ -233,7 +269,8 @@ class _LocationState extends State<Location> {
                       if (value == null || value.isEmpty) {
                         return 'Please provide a valid address';
                       }
-                      return null;
+                      _firestore.collection('reservation').doc(docId).set(
+                          {'address': '${value}'}, SetOptions(merge: true));
                     },
                     keyboardType: TextInputType.streetAddress,
                     decoration: InputDecoration(
@@ -282,6 +319,8 @@ class _LocationState extends State<Location> {
                         if (value == null || value.isEmpty) {
                           return 'please enter some text';
                         }
+                        _firestore.collection('reservation').doc(docId).set(
+                            {'region': '${value}'}, SetOptions(merge: true));
                         return null;
                       },
                       decoration: InputDecoration(
@@ -330,6 +369,10 @@ class _LocationState extends State<Location> {
                         if (value == null || value.isEmpty) {
                           return 'please enter some text';
                         }
+                        _firestore
+                            .collection('reservation')
+                            .doc(docId)
+                            .set({'city': '${value}'}, SetOptions(merge: true));
                         return null;
                       },
                       decoration: InputDecoration(

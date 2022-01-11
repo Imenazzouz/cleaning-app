@@ -4,11 +4,13 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
-import 'package:flutter_credit_card/flutter_credit_card.dart';
-
-// Set this to a public key that matches the secret key you supplied while creating the heroku instance
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:myapp/Services.dart';
 
 class Pay extends StatelessWidget {
+  final _firestore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -70,6 +72,8 @@ class _HomePageState extends State<HomePage> {
   bool useGlassMorphism = false;
   bool useBackgroundImage = true;
   OutlineInputBorder? border;
+  final _firestore = FirebaseFirestore.instance;
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -195,15 +199,21 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white,
                             fontFamily: 'Poppins',
                             fontSize: 20,
-                            package: 'flutter_credit_card',
                           ),
                         ),
                       ),
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          print('valid!');
+                          _firestore
+                              .collection("reservation")
+                              .doc(docId)
+                              .set({'payed': true}, SetOptions(merge: true));
+                          Navigator.pushNamed(context, '/page1');
                         } else {
-                          print('invalid!');
+                          _firestore
+                              .collection("reservation")
+                              .doc(docId)
+                              .set({'payed': false}, SetOptions(merge: true));
                         }
                       },
                     ),

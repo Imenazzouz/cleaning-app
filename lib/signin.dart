@@ -31,6 +31,7 @@ class _SigninState extends State<Signin> with SingleTickerProviderStateMixin {
   }
 
   final _formKey = GlobalKey<FormState>();
+
   bool _validate = false;
   bool _visible = true;
   final _controller = TextEditingController();
@@ -44,284 +45,278 @@ class _SigninState extends State<Signin> with SingleTickerProviderStateMixin {
     return SingleChildScrollView(
       reverse: true,
       child: Material(
-        child: ModalProgressHUD(
-          inAsyncCall: showSpinner,
-          child: Stack(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                color: Colors.blue,
-              ),
-              const TopSignin(),
-              Container(
-                margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.1),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: whiteshade,
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(45),
-                        topRight: Radius.circular(45))),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.09),
-                        child: Image.asset(
-                          "assets/h.jpg",
-                          height: animation.value * 180,
-                        ),
+        child: Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.blue,
+            ),
+            const TopSignin(),
+            Container(
+              margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.1),
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  color: whiteshade,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(45),
+                      topRight: Radius.circular(45))),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.09),
+                      child: Image.asset(
+                        "assets/h.jpg",
+                        height: animation.value * 180,
                       ),
-                      const SizedBox(
-                        height: 10,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 10,
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          bottom: 10,
-                        ),
-                        child: Text(
-                          'Email',
-                          style: const TextStyle(
+                      child: Text(
+                        'Email',
+                        style: const TextStyle(
+                            color: Colors.blueAccent,
+                            letterSpacing: 0.7,
+                            fontFamily: 'poppins',
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10.0, left: 10),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.grey[300],
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
                               color: Colors.blueAccent,
-                              letterSpacing: 0.7,
-                              fontFamily: 'poppins',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10.0, left: 10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.grey[300],
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.blueAccent,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
                             ),
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red),
-                                borderRadius: BorderRadius.circular(30)),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.blue,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            errorStyle: TextStyle(fontFamily: 'Poppins'),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.red,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            hintText: "   salah@gmail.com",
-                            border: InputBorder.none,
+                            borderRadius: BorderRadius.circular(30.0),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'please enter your Email';
-                            }
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(30)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          errorStyle: TextStyle(fontFamily: 'Poppins'),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          hintText: "   salah@gmail.com",
+                          border: InputBorder.none,
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'please enter your Email';
+                          }
+                          return null;
+                        },
+                        controller: emailcontroller,
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 10,
+                      ),
+                      child: Text(
+                        'Password',
+                        style: const TextStyle(
+                            color: Colors.blueAccent,
+                            letterSpacing: 0.7,
+                            fontFamily: 'poppins',
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10.0, left: 10),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                              icon: Icon(_visible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                              onPressed: () {
+                                setState(() {
+                                  _visible = !_visible;
+                                });
+                              }),
+                          filled: true,
+                          fillColor: Colors.grey[300],
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blueAccent,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(30)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          errorStyle: TextStyle(fontFamily: 'Poppins'),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                            ),
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          hintText:
+                              "Password should at least contain 8 charachters",
+                          hintStyle: TextStyle(fontSize: 12),
+                          border: InputBorder.none,
+                        ),
+                        validator: (value) {
+                          if (value == null) {
                             return null;
-                          },
-                          controller: emailcontroller,
-                          keyboardType: TextInputType.emailAddress,
-                        ),
+                          }
+                          if (value.isEmpty) {
+                            return "* Required";
+                          } else if (value.length < 6) {
+                            return "Password should be at least 6 characters";
+                          } else if (value.length > 15) {
+                            return "Password should not be greater than 15 characters";
+                          } else
+                            return null;
+                        },
+                        obscureText: _visible,
+                        controller: passwordcontroller,
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          bottom: 10,
-                        ),
-                        child: Text(
-                          'Password',
-                          style: const TextStyle(
-                              color: Colors.blueAccent,
-                              letterSpacing: 0.7,
-                              fontFamily: 'poppins',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10.0, left: 10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                                icon: Icon(_visible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off),
-                                onPressed: () {
-                                  setState(() {
-                                    _visible = !_visible;
-                                  });
-                                }),
-                            filled: true,
-                            fillColor: Colors.grey[300],
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                    ),
+                    Row(
+                      children: [
+                        const CheckerBox(),
+                      ],
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.07,
+                        margin: const EdgeInsets.only(left: 20, right: 20),
+                        decoration: BoxDecoration(
+                            color: blue,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30))),
+                        child: Center(
+                          child: Container(
+                            width: 300,
+                            decoration: BoxDecoration(
                                 color: Colors.blueAccent,
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(30))),
+                            child: FlatButton(
+                              child: const Text(
+                                'sign in ',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontFamily: 'poppins',
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 1),
                               ),
-                              borderRadius: BorderRadius.circular(30.0),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              textColor: Colors.black,
+                              height: 65.0,
+                              onPressed: () {
+                                setState(() {
+                                  showSpinner = true;
+                                });
+                                _formKey.currentState!.validate();
+                                AuthenticationHelper()
+                                    .signIn(
+                                        email: emailcontroller.text,
+                                        password: passwordcontroller.text)
+                                    .then((result) {
+                                  if (result == null) {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Page1()));
+                                  } else {
+                                    setState(() {
+                                      showSpinner = false;
+                                    });
+                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text(
+                                        result,
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ));
+                                  }
+                                });
+                              },
                             ),
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red),
-                                borderRadius: BorderRadius.circular(30)),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.blue,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            errorStyle: TextStyle(fontFamily: 'Poppins'),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.red,
-                              ),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            hintText:
-                                "Password should at least contain 8 charachters",
-                            hintStyle: TextStyle(fontSize: 12),
-                            border: InputBorder.none,
                           ),
-                          validator: (value) {
-                            if (value == null) {
-                              return null;
-                            }
-                            if (value.isEmpty) {
-                              return "* Required";
-                            } else if (value.length < 8) {
-                              return "Password should be at least 8 characters";
-                            } else if (value.length > 15) {
-                              return "Password should not be greater than 15 characters";
-                            } else
-                              return null;
-                          },
-                          obscureText: _visible,
-                          controller: passwordcontroller,
                         ),
                       ),
-                      Row(
-                        children: [
-                          const CheckerBox(),
-                        ],
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.07,
-                          margin: const EdgeInsets.only(left: 20, right: 20),
-                          decoration: BoxDecoration(
-                              color: blue,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(30))),
-                          child: Center(
-                            child: Container(
-                              width: 300,
-                              decoration: BoxDecoration(
-                                  color: Colors.blueAccent,
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(30))),
-                              child: FlatButton(
-                                child: const Text(
-                                  'sign in ',
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.149,
+                          top: MediaQuery.of(context).size.height * 0.02),
+                      child: Text.rich(
+                        TextSpan(
+                            text: "Don't already Have an account? ",
+                            style: TextStyle(
+                                letterSpacing: 0.7,
+                                fontFamily: 'poppins',
+                                color: blackshade,
+                                fontSize: 12),
+                            children: [
+                              TextSpan(
+                                  text: "Sign Up",
                                   style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 22,
-                                      fontFamily: 'poppins',
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: 1),
-                                ),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                                textColor: Colors.black,
-                                height: 65.0,
-                                onPressed: () {
-                                  setState(() {
-                                    showSpinner = true;
-                                  });
-                                  _formKey.currentState!.validate();
-                                  AuthenticationHelper()
-                                      .signIn(
-                                          email: emailcontroller.text,
-                                          password: passwordcontroller.text)
-                                      .then((result) {
-                                    if (result == null) {
+                                      color: blue,
+                                      fontSize: 16,
+                                      fontFamily: 'poppins'),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
                                       Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => Page1()));
-                                    } else {
-                                      setState(() {
-                                        showSpinner = false;
-                                      });
-                                      Scaffold.of(context)
-                                          .showSnackBar(SnackBar(
-                                        content: Text(
-                                          result,
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                      ));
-                                    }
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
+                                              builder: (context) => SignUp()));
+                                    }),
+                            ]),
                       ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.149,
-                            top: MediaQuery.of(context).size.height * 0.02),
-                        child: Text.rich(
-                          TextSpan(
-                              text: "Don't already Have an account? ",
-                              style: TextStyle(
-                                  letterSpacing: 0.7,
-                                  fontFamily: 'poppins',
-                                  color: blackshade,
-                                  fontSize: 12),
-                              children: [
-                                TextSpan(
-                                    text: "Sign Up",
-                                    style: TextStyle(
-                                        color: blue,
-                                        fontSize: 16,
-                                        fontFamily: 'poppins'),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SignUp()));
-                                      }),
-                              ]),
-                        ),
-                      ),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.06)
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.06)
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

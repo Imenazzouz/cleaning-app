@@ -1,6 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:myapp/Services.dart';
 
 class Company extends StatefulWidget {
   const Company({Key? key}) : super(key: key);
@@ -32,6 +35,8 @@ class ServicePick extends StatefulWidget {
 
 class _ServicePickState extends State<ServicePick> {
   @override
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
   bool _hasBeenPressedLH = false;
   bool _hasBeenPressedWind = false;
   bool _hasBeenPressedFloor = false;
@@ -328,6 +333,10 @@ class _ServicePickState extends State<ServicePick> {
       appBar: AppBar(
         leading: BackButton(
           color: Colors.white,
+          onPressed: () {
+            _firestore.collection('reservation').doc(docId).delete();
+            Navigator.pushNamed(context, '/page1');
+          },
         ),
         title: Text(
           'Cleaning master',
@@ -409,7 +418,26 @@ class _ServicePickState extends State<ServicePick> {
                         color: Colors.blue,
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/providedby');
+                        _firestore.collection('reservation').doc(docId).set({
+                          'Disinfection': _hasBeenPressedMaid,
+                          'staff': _hasBeenPressedStaff,
+                          'windows': _hasBeenPressedWind,
+                          'floor': _hasBeenPressedFloor,
+                          'furniture': _hasBeenPressedFurn,
+                          'rooms': _hasBeenPressedLH
+                        }, SetOptions(merge: true));
+                        if (_hasBeenPressedLH ||
+                            _hasBeenPressedFurn ||
+                            _hasBeenPressedFloor ||
+                            _hasBeenPressedWind ||
+                            _hasBeenPressedStaff ||
+                            _hasBeenPressedMaid) {
+                          Navigator.pushNamed(context, '/providedby');
+                        }
+                        Text(
+                          'please select a service',
+                          style: TextStyle(color: Colors.black),
+                        );
                       },
                     )
                   ],

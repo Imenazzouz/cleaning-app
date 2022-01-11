@@ -2,26 +2,45 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/Location.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:myapp/Services.dart';
 
 final _firestore = FirebaseFirestore.instance;
 CompanyItem choosenCompany = CompanyItem(title: 'none', image: '', id: 0);
+final _auth = FirebaseAuth.instance;
 
 class ChooseCompany extends StatefulWidget {
   const ChooseCompany({Key? key}) : super(key: key);
-
   @override
   _ChooseCompanyState createState() => _ChooseCompanyState();
 }
 
 class _ChooseCompanyState extends State<ChooseCompany> {
   @override
+  @override
+  void initState() {
+    super.initState();
+    print(docId);
+  }
+
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
           color: Colors.white,
           onPressed: () {
+            _firestore.collection('reservation').doc(docId).update({
+              'Disinfection': FieldValue.delete(),
+              'staff': FieldValue.delete(),
+              'windows': FieldValue.delete(),
+              'floor': FieldValue.delete(),
+              'furniture': FieldValue.delete(),
+              'rooms': FieldValue.delete()
+            });
+            _firestore.collection('reservation').doc(docId).delete();
+
             Navigator.pushNamed(context, '/page1');
           },
         ),
@@ -79,7 +98,11 @@ class _ChooseCompanyState extends State<ChooseCompany> {
                 padding:
                     EdgeInsets.symmetric(vertical: screenSize.height * 0.02),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    await _firestore.collection('reservation').doc(docId).set(
+                        {'company': '${choosenCompany.title}'},
+                        SetOptions(merge: true));
+                    print(docId);
                     print(choosenCompany.title);
                     Navigator.pushNamed(context, '/location');
                   },

@@ -1,8 +1,16 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/Profile.dart';
-import 'package:myapp/companies.dart';
+
 import 'package:myapp/nard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+final _firestore = FirebaseFirestore.instance;
+final _auth = FirebaseAuth.instance;
+CollectionReference document = _firestore.collection('reservation');
+
+late String docId = document.id;
+late User loggedInUser;
 
 class Services extends StatefulWidget {
   const Services({Key? key}) : super(key: key);
@@ -13,6 +21,29 @@ class Services extends StatefulWidget {
 
 class _ServicesState extends State<Services> {
   @override
+  void initState() {
+    getCurrentUser();
+    getCurrentData();
+    super.initState();
+  }
+
+  void getCurrentUser() async {
+    final user = await _auth.currentUser;
+    if (user != null) {
+      loggedInUser = user;
+      print(loggedInUser.email);
+    }
+  }
+
+  void getCurrentData() async {
+    _firestore
+        .collection('reservation')
+        .add({'uid': loggedInUser.uid}).then((docRef) {
+      docId = docRef.id;
+      print('from services $docId');
+    });
+  }
+
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
 
@@ -113,6 +144,9 @@ class _ServicesState extends State<Services> {
                         ),
                       ),
                       onPressed: () {
+                        _firestore.collection('reservation').doc(docId).set(
+                            {'Service to': 'company'}, SetOptions(merge: true));
+
                         Navigator.pushNamed(context, '/company');
                       },
                     ),
@@ -141,6 +175,10 @@ class _ServicesState extends State<Services> {
                         ),
                       ),
                       onPressed: () {
+                        _firestore.collection('reservation').doc(docId).set({
+                          'uid': '${loggedInUser.uid}',
+                          'serviceTo': 'hospital'
+                        }, SetOptions(merge: true));
                         Navigator.pushNamed(context, '/hospital');
                       },
                     ),
@@ -210,6 +248,9 @@ class _ServicesState extends State<Services> {
                         ),
                       ),
                       onPressed: () {
+                        _firestore.collection('reservation').doc(docId).set(
+                            {'uid': '${loggedInUser.uid}', 'serviceTo': 'home'},
+                            SetOptions(merge: true));
                         Navigator.pushNamed(context, '/page2');
                       },
                     ),
@@ -238,6 +279,10 @@ class _ServicesState extends State<Services> {
                         ),
                       ),
                       onPressed: () {
+                        _firestore.collection('reservation').doc(docId).set({
+                          'uid': '${loggedInUser.uid}',
+                          'serviceTo': 'factory'
+                        }, SetOptions(merge: true));
                         Navigator.pushNamed(context, '/factory');
                       },
                     ),
@@ -296,6 +341,10 @@ class _ServicesState extends State<Services> {
                         ),
                       ),
                       onPressed: () {
+                        _firestore.collection('reservation').doc(docId).set({
+                          'uid': '${loggedInUser.uid}',
+                          'serviceTo': 'restaurant'
+                        }, SetOptions(merge: true));
                         Navigator.pushNamed(context, '/restaurant');
                       },
                     ),
@@ -324,6 +373,10 @@ class _ServicesState extends State<Services> {
                         ),
                       ),
                       onPressed: () {
+                        _firestore.collection('reservation').doc(docId).set({
+                          'uid': '${loggedInUser.uid}',
+                          'serviceTo': 'hotel'
+                        }, SetOptions(merge: true));
                         Navigator.pushNamed(context, '/hotel');
                       },
                     ),

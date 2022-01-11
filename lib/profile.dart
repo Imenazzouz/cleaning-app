@@ -243,7 +243,7 @@ class _ProfilePageState extends State<ProfilePage> {
       );
 
   Widget buildUpgradeButton() => ButtonWidget(
-        text: 'Disconnect',
+        text: 'Disconnect now',
         onClicked: () {},
       );
 
