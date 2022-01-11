@@ -408,10 +408,10 @@ class _LocationState extends State<Location> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Colors.blueAccent),
-                    child: FlatButton(
+                    child: MaterialButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          Navigator.pushNamed(context, '/pay');
+                          Navigator.pushNamed(context, '/calendar');
                         }
                       },
                       child: Text(

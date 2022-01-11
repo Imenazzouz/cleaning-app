@@ -7,9 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 final _firestore = FirebaseFirestore.instance;
 final _auth = FirebaseAuth.instance;
-CollectionReference document = _firestore.collection('reservation');
 
-late String docId = document.id;
+late String docId = _firestore.collection('reservation').id;
 late User loggedInUser;
 
 class Services extends StatefulWidget {
@@ -22,9 +21,9 @@ class Services extends StatefulWidget {
 class _ServicesState extends State<Services> {
   @override
   void initState() {
+    super.initState();
     getCurrentUser();
     getCurrentData();
-    super.initState();
   }
 
   void getCurrentUser() async {
@@ -36,12 +35,21 @@ class _ServicesState extends State<Services> {
   }
 
   void getCurrentData() async {
-    _firestore
-        .collection('reservation')
-        .add({'uid': loggedInUser.uid}).then((docRef) {
-      docId = docRef.id;
-      print('from services $docId');
-    });
+    var test = false;
+    final data = await _firestore.collection('reservation').get();
+    for (var reservation in data.docs) {
+      if (reservation.data()['uid'] == loggedInUser.uid) {
+        docId = reservation.id;
+        test = true;
+      }
+    }
+    if (test == false) {
+      _firestore
+          .collection('reservation')
+          .add({'uid': loggedInUser.uid}).then((docRef) {
+        docId = docRef.id;
+      });
+    }
   }
 
   Widget build(BuildContext context) {

@@ -13,45 +13,41 @@ class Pay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'payment',
-      home: Scaffold(
-        backgroundColor: Colors.blue,
-        appBar: AppBar(
-          leading: BackButton(
-            color: Colors.white,
-            onPressed: () {
-              Navigator.pushNamed(context, '/location');
-            },
-          ),
-          title: Text(
-            'Cleaning master',
-            style: TextStyle(
-                fontSize: 17.0,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w600,
-                letterSpacing: 1.0,
-                color: Colors.white),
-          ),
-          centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                // do something
-              },
-            )
-          ],
-          backgroundColor: Colors.blueAccent,
-          elevation: 0.0,
+    return Scaffold(
+      backgroundColor: Colors.blue,
+      appBar: AppBar(
+        leading: BackButton(
+          color: Colors.white,
+          onPressed: () {
+            Navigator.pushNamed(context, '/location');
+          },
         ),
-        body: HomePage(),
-        resizeToAvoidBottomInset: false,
+        title: Text(
+          'Cleaning master',
+          style: TextStyle(
+              fontSize: 17.0,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w600,
+              letterSpacing: 1.0,
+              color: Colors.white),
+        ),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // do something
+            },
+          )
+        ],
+        backgroundColor: Colors.blueAccent,
+        elevation: 0.0,
       ),
+      body: HomePage(),
+      resizeToAvoidBottomInset: false,
     );
   }
 }
