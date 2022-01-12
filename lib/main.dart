@@ -21,6 +21,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:myapp/companies.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:myapp/calendar.dart';
+import 'package:myapp/home_screen1.dart';
+import 'package:myapp/details_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,6 +55,8 @@ class MyApp extends StatelessWidget {
         '/location': (context) => Location(),
         '/providedby': (context) => ChooseCompany(),
         '/calendar': (context) => Calendar(),
+        '/homescreen': (context) => HomeScreen(),
+        '/detailscreen': (context) => DetailsScreen(),
       },
     );
   }
