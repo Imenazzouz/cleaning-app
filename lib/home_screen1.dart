@@ -1,7 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/History.dart';
+import 'package:myapp/Services.dart';
 import 'constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myapp/details_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+final _firestore = FirebaseFirestore.instance;
 
 class TitleWithMoreBtn extends StatelessWidget {
   const TitleWithMoreBtn({
@@ -69,8 +76,9 @@ class RecomendsPlants extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
+    /*return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,*/
+/*
       child: Row(
         children: <Widget>[
           RecomendCard(
@@ -111,7 +119,72 @@ class RecomendsPlants extends StatelessWidget {
           ),
         ],
       ),
-    );
+*/
+    return HistoryStream();
+  }
+}
+
+class HistoryStream extends StatefulWidget {
+  const HistoryStream({Key? key}) : super(key: key);
+
+  @override
+  _HistoryStreamState createState() => _HistoryStreamState();
+}
+
+class _HistoryStreamState extends State<HistoryStream> {
+  @override
+  int selectedIndex = 0;
+  int i = 0;
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+        stream: _firestore.collection('reservation').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final reservations = snapshot.data!.docs;
+            List<RecomendCard> reservedItems = [];
+            for (var reservation in reservations) {
+              if ((reservation.get('payed') == true) &
+                  (reservation.get('uid') == loggedInUser.uid)) {
+                final reservationCompany = reservation.get('company');
+                final reservationImage = reservation.get('companyImage');
+                final historyItem = RecomendCard(
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsScreen(),
+                      ),
+                    );
+                  },
+                  title: reservationCompany,
+                  image: reservationImage,
+                );
+                print(historyItem.title);
+                reservedItems.add(historyItem);
+                continue;
+              }
+
+              return SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: reservedItems.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                            child: reservedItems[index],
+                            width: MediaQuery.of(context).size.width * 0.4);
+                      }),
+                ),
+              );
+            }
+          }
+          return Text('no reservations done');
+        });
   }
 }
 
@@ -132,10 +205,15 @@ class RecomendCard extends StatelessWidget {
         top: kDefaultPadding / 2,
         bottom: kDefaultPadding * 2.5,
       ),
-      width: size.width * 0.4,
+      width: size.width * 0.6,
+      height: size.height * 0.3,
       child: Column(
         children: <Widget>[
-          Image.asset(image),
+          Image.asset(
+            image,
+            width: size.width * 0.6,
+            height: size.height * 0.2,
+          ),
           GestureDetector(
             onTap: press,
             child: Container(
@@ -353,16 +431,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
       body: Body(),
     );
   }
 
   AppBar buildAppBar() {
     return AppBar(
-      leading: const BackButton(
-        color: Colors.white,
-      ),
       title: const Text(' '),
       centerTitle: true,
       actions: <Widget>[

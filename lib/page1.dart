@@ -3,6 +3,7 @@ import 'package:myapp/Location.dart';
 import 'package:myapp/Profile.dart';
 import 'package:myapp/Services.dart';
 import 'package:myapp/companies.dart';
+import 'package:myapp/home_screen1.dart';
 import 'package:myapp/nard.dart';
 import 'ProvidingCompanies.dart';
 
@@ -18,7 +19,7 @@ class _Page1State extends State<Page1> {
   static const _kDuration = const Duration(milliseconds: 300);
   static const _kCurve = Curves.ease;
   int currentIndex = 0;
-  final screens = [Services(), ProfilePage(), Location()];
+  final screens = [Services(), ProfilePage(), HomeScreen()];
 
   @override
   Widget build(BuildContext context) {

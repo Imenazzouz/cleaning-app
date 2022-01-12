@@ -16,7 +16,6 @@ class _CalendarState extends State<Calendar> {
   String _selectedDate = '';
   String _dateCount = '';
   final _firestore = FirebaseFirestore.instance;
-
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     setState(() {
       if (args.value is PickerDateRange) {

@@ -38,17 +38,34 @@ class _ServicesState extends State<Services> {
     var test = false;
     final data = await _firestore.collection('reservation').get();
     for (var reservation in data.docs) {
-      if (reservation.data()['uid'] == loggedInUser.uid) {
+      if ((reservation.data()['uid'] == loggedInUser.uid) &
+          (reservation.data()['payed'] == false)) {
         docId = reservation.id;
         test = true;
       }
     }
     if (test == false) {
-      _firestore
-          .collection('reservation')
-          .add({'uid': loggedInUser.uid}).then((docRef) {
+      _firestore.collection('reservation').add({
+        'uid': loggedInUser.uid,
+        'Disinfection': false,
+        'Service to': '',
+        'company': '',
+        'companyImage': '',
+        'date': '',
+        "firstName": '',
+        'floor': '',
+        'furniture': '',
+        'lastName': '',
+        'payed': false,
+        'phoneNumber': '',
+        'region': '',
+        'rooms': '',
+        'staff': '',
+        'windows': ''
+      }).then((docRef) {
         docId = docRef.id;
       });
+      print(test);
     }
   }
 

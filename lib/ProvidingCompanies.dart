@@ -99,9 +99,10 @@ class _ChooseCompanyState extends State<ChooseCompany> {
                     EdgeInsets.symmetric(vertical: screenSize.height * 0.02),
                 child: ElevatedButton(
                   onPressed: () async {
-                    await _firestore.collection('reservation').doc(docId).set(
-                        {'company': '${choosenCompany.title}'},
-                        SetOptions(merge: true));
+                    await _firestore.collection('reservation').doc(docId).set({
+                      'company': '${choosenCompany.title}',
+                      'companyImage': '${choosenCompany.image}'
+                    }, SetOptions(merge: true));
                     print(docId);
                     print(choosenCompany.title);
                     Navigator.pushNamed(context, '/location');
