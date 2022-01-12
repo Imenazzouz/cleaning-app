@@ -147,12 +147,13 @@ class _HistoryStreamState extends State<HistoryStream> {
                   (reservation.get('uid') == loggedInUser.uid)) {
                 final reservationCompany = reservation.get('company');
                 final reservationImage = reservation.get('companyImage');
+                
                 final historyItem = RecomendCard(
                   press: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DetailsScreen(),
+                        builder: (context) => DetailsScreen(title:reservationCompany,image: reservationImage,key: null),
                       ),
                     );
                   },
@@ -177,7 +178,7 @@ class _HistoryStreamState extends State<HistoryStream> {
                       itemBuilder: (context, index) {
                         return Container(
                             child: reservedItems[index],
-                            width: MediaQuery.of(context).size.width * 0.4);
+                            width: MediaQuery.of(context).size.width * 0.7);
                       }),
                 ),
               );
@@ -203,9 +204,9 @@ class RecomendCard extends StatelessWidget {
       margin: EdgeInsets.only(
         left: kDefaultPadding,
         top: kDefaultPadding / 2,
-        bottom: kDefaultPadding * 2.5,
+        bottom: kDefaultPadding ,
       ),
-      width: size.width * 0.6,
+      width: size.width ,
       height: size.height * 0.3,
       child: Column(
         children: <Widget>[
@@ -431,12 +432,16 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: buildAppBar(),
       body: Body(),
     );
   }
 
   AppBar buildAppBar() {
     return AppBar(
+      leading: const BackButton(
+        color: Colors.white,
+      ),
       title: const Text(' '),
       centerTitle: true,
       actions: <Widget>[

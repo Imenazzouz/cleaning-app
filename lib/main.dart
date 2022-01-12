@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
         '/providedby': (context) => ChooseCompany(),
         '/calendar': (context) => Calendar(),
         '/homescreen': (context) => HomeScreen(),
-        '/detailscreen': (context) => DetailsScreen(),
+        '/detailscreen': (context) => DetailsScreen(image:'',title:'',),
       },
     );
   }

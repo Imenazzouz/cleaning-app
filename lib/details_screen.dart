@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'dart:math';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myapp/Location.dart';
 
 class TitleAndPrice extends StatelessWidget {
   const TitleAndPrice({
@@ -42,13 +43,7 @@ class TitleAndPrice extends StatelessWidget {
             ),
           ),
           Spacer(),
-          Text(
-            "\$$price",
-            style: Theme.of(context)
-                .textTheme
-                .headline5!
-                .copyWith(color: Colors.blueAccent),
-          )
+          
         ],
       ),
     );
@@ -98,7 +93,7 @@ class _RatingViewState extends State<RatingView> {
             right: 0.0,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.blueAccent[100],
+                color: Colors.blueAccent,
               ),
               // ignore: deprecated_member_use
               child: FlatButton(
@@ -126,7 +121,7 @@ class _RatingViewState extends State<RatingView> {
                           icon: index < _rating
                               ? Icon(Icons.star, size: 32)
                               : Icon(Icons.star_border, size: 32),
-                          color: Colors.blueAccent[100],
+                          color: Colors.yellow,
                           onPressed: () {
                             _ratingPageController.nextPage(
                                 duration: Duration(milliseconds: 300),
@@ -166,12 +161,13 @@ class _RatingViewState extends State<RatingView> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
+
       children: [
         SizedBox(height: 15),
         Text(
           'Thanks for choosing our company',
           style: TextStyle(
-              fontSize: 18,
+              fontSize: 15,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,
               letterSpacing: 0.2,
@@ -190,7 +186,7 @@ class _RatingViewState extends State<RatingView> {
       ],
     );
   }
-
+final screens = ["services","Staff", "Products","Rapidity","safety","punctuality"];
   _causeOfRating() {
     return Stack(
       alignment: Alignment.center,
@@ -216,7 +212,7 @@ class _RatingViewState extends State<RatingView> {
                           backgroundColor: _selectedchipindex == index
                               ? Colors.blueAccent
                               : Colors.grey[300],
-                          label: Text('text ${index + 1}'),
+                          label: Text(screens[index]),
                         ))),
               ),
               SizedBox(height: 16),
@@ -296,11 +292,14 @@ class IconCard extends StatelessWidget {
 }
 
 class ImageAndIcons extends StatelessWidget {
-  const ImageAndIcons({
+  
+
+   const ImageAndIcons({
     Key? key,
+    required this.image,
     required this.size,
   }) : super(key: key);
-
+  final String image;
   final Size size;
 
   @override
@@ -311,45 +310,26 @@ class ImageAndIcons extends StatelessWidget {
         height: size.height * 0.8,
         child: Row(
           children: <Widget>[
-            Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: kDefaultPadding * 3),
-                child: Column(
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: IconButton(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                        icon: SvgPicture.asset(""),
-                        onPressed: () {},
-                      ),
-                    ),
-                    Spacer(),
-                  ],
-                ),
-              ),
-            ),
+            
             Container(
-              height: size.height * 0.8,
-              width: size.width * 0.75,
+              height: 420,
+              width: 410 ,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(63),
-                  bottomLeft: Radius.circular(63),
+                  topLeft: Radius.circular(70),
+                  bottomLeft: Radius.circular(10),
                 ),
                 boxShadow: [
                   BoxShadow(
                     offset: Offset(0, 10),
                     blurRadius: 60,
-                    color: Colors.blueAccent.withOpacity(0.29),
+                    color: Colors.blueAccent.withOpacity(0.2),
                   ),
                 ],
+                
                 image: DecorationImage(
-                  alignment: Alignment.centerLeft,
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/img.png"),
+                  alignment: Alignment.center,
+                  image: AssetImage(image),
                 ),
               ),
             ),
@@ -361,26 +341,37 @@ class ImageAndIcons extends StatelessWidget {
 }
 
 class Body extends StatelessWidget {
-  @override
+  
+   const Body({
+    Key? key,
+    this.title = '',
+    this.country = '',
+    required this.imagee,
+    this.price = 0,
+  }) : super(key: key);
+final String title, country, imagee;
+  final int price;  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
           ImageAndIcons(
-            size: size / 1.25,
+            image: '$imagee' ,
+            size: size / 1.4,
             key: null,
           ),
           TitleAndPrice(
-            title: "Cleaning Services",
+            title: "$title",
+            price:price,
             key: null,
           ),
           SizedBox(height: kDefaultPadding),
           Row(
             children: <Widget>[
               SizedBox(
-                width: size.width / 2,
-                height: 84,
+                width: size.width/2,
+                height: 95,
                 // ignore: deprecated_member_use
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
@@ -390,7 +381,12 @@ class Body extends StatelessWidget {
                     ),
                   ),
                   color: Colors.blueAccent,
-                  onPressed: () {},
+                  onPressed: () {Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Location(),
+                ),);
+                },
                   child: Text(
                     "Reserve",
                     style: TextStyle(
@@ -434,11 +430,22 @@ OpenRatingDialog(BuildContext context) {
 }
 
 class DetailsScreen extends StatelessWidget {
+  
+   const DetailsScreen({
+    Key? key,
+    this.title = '',
+        required this.image,
+
+    this.country = '',
+    this.price = 0,
+  }) : super(key: key);
+  final String title, country,image;
+  final int price;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: Body(),
+      body: Body(title:"$title\n", imagee: "$image",key: null,price: price,),
     );
   }
 
