@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/ProvidingCompanies.dart';
 import 'package:myapp/Restaurant.dart';
-import 'package:myapp/companies.dart';
 import 'package:myapp/company.dart';
 import 'package:myapp/factory.dart';
 import 'package:myapp/hospital.dart';
@@ -18,11 +17,11 @@ import 'package:myapp/signup.dart';
 import 'package:myapp/splash.dart';
 import 'package:myapp/Location.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:myapp/companies.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:myapp/calendar.dart';
 import 'package:myapp/home_screen1.dart';
 import 'package:myapp/details_screen.dart';
+import 'package:myapp/PartnerCompanies.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,7 +55,11 @@ class MyApp extends StatelessWidget {
         '/providedby': (context) => ChooseCompany(),
         '/calendar': (context) => Calendar(),
         '/homescreen': (context) => HomeScreen(),
-        '/detailscreen': (context) => DetailsScreen(image:'',title:'',),
+        '/detailscreen': (context) => DetailsScreen(
+              image: '',
+              title: '',
+            ),
+        '/partners': (context) => ProvidingCompany()
       },
     );
   }

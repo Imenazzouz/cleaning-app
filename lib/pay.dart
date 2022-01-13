@@ -19,7 +19,7 @@ class Pay extends StatelessWidget {
         leading: BackButton(
           color: Colors.white,
           onPressed: () {
-            Navigator.pushNamed(context, '/location');
+            Navigator.pushNamed(context, '/calendar');
           },
         ),
         title: Text(
@@ -32,17 +32,7 @@ class Pay extends StatelessWidget {
               color: Colors.white),
         ),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // do something
-            },
-          )
-        ],
+        actions: <Widget>[],
         backgroundColor: Colors.blueAccent,
         elevation: 0.0,
       ),

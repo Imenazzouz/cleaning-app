@@ -124,7 +124,7 @@ class _SigninState extends State<Signin> with SingleTickerProviderStateMixin {
                             ),
                             borderRadius: BorderRadius.circular(30.0),
                           ),
-                          hintText: "   salah@gmail.com",
+                          hintText: "   youremail@gmail.com",
                           border: InputBorder.none,
                         ),
                         validator: (value) {

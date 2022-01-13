@@ -6,7 +6,8 @@ Future<void> userSetup(String username, String email) async {
   FirebaseAuth auth = FirebaseAuth.instance;
   String uid = auth.currentUser!.uid.toString();
   String email = auth.currentUser!.email.toString();
-
   users.add({'username': username, 'uid': uid, 'email': email});
+  auth.currentUser!.updateDisplayName(username);
+
   return;
 }

@@ -86,17 +86,7 @@ class _ServicesState extends State<Services> {
               color: Colors.white),
         ),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.notifications,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // do something
-            },
-          )
-        ],
+        actions: <Widget>[],
         backgroundColor: Colors.blueAccent,
         elevation: 0.0,
       ),
@@ -170,7 +160,7 @@ class _ServicesState extends State<Services> {
                       ),
                       onPressed: () {
                         _firestore.collection('reservation').doc(docId).set(
-                            {'Service to': 'company'}, SetOptions(merge: true));
+                            {'ServiceTo': 'company'}, SetOptions(merge: true));
 
                         Navigator.pushNamed(context, '/company');
                       },

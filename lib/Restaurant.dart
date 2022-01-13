@@ -341,17 +341,7 @@ class _ServicePickState extends State<ServicePick> {
               color: Colors.white),
         ),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // do something
-            },
-          )
-        ],
+        actions: <Widget>[],
         backgroundColor: Colors.blueAccent,
         elevation: 0.0,
       ),
@@ -368,39 +358,34 @@ class _ServicePickState extends State<ServicePick> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  FlatButton(
-                    child: Icon(
-                      Icons.arrow_back_rounded,
-                      size: 30,
-                      color: Colors.blue,
-                    ),
-                    onPressed: () {},
-                  ),
-                  Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        AnimatedTextKit(
-                          animatedTexts: [
-                            WavyAnimatedText('Pick your services',
-                                textStyle: TextStyle(
-                                    fontSize: 15.0,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 1.0,
-                                    color: Colors.blue),
-                                speed: Duration(milliseconds: 100))
-                          ],
-                          isRepeatingAnimation: false,
-                        ),
-                        Hero(
-                          tag: 'restaurant',
-                          child: Image.asset(
-                            'assets/2.jpg',
-                            height: 120,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 80.0),
+                    child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          AnimatedTextKit(
+                            animatedTexts: [
+                              WavyAnimatedText('Pick your services',
+                                  textStyle: TextStyle(
+                                      fontSize: 15.0,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 1.0,
+                                      color: Colors.blue),
+                                  speed: Duration(milliseconds: 100))
+                            ],
+                            isRepeatingAnimation: false,
                           ),
-                        )
-                      ]),
+                          Hero(
+                            tag: 'restaurant',
+                            child: Image.asset(
+                              'assets/2.jpg',
+                              height: 120,
+                            ),
+                          )
+                        ]),
+                  ),
                   FlatButton(
                     child: Icon(
                       Icons.arrow_forward_rounded,

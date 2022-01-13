@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/Location.dart';
 import 'package:myapp/Profile.dart';
 import 'package:myapp/Services.dart';
-import 'package:myapp/companies.dart';
+import 'package:myapp/edit_profile.dart';
 import 'package:myapp/home_screen1.dart';
 import 'package:myapp/nard.dart';
 import 'ProvidingCompanies.dart';

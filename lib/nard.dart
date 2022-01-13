@@ -36,7 +36,7 @@ class _NavDrawerState extends State<NavDrawer> {
       initialRating: 1.0,
       // your app's name?
       title: Text(
-        'Rating Dialog',
+        'Rate Us',
         textAlign: TextAlign.center,
         style: const TextStyle(
           fontSize: 25,
@@ -52,7 +52,7 @@ class _NavDrawerState extends State<NavDrawer> {
       // your app's logo?
       image: const FlutterLogo(size: 100),
       submitButtonText: 'Submit',
-      commentHint: 'Set your custom comment hint',
+      commentHint: 'We wait for your feedback',
       onCancelled: () => print('cancelled'),
       onSubmitted: (response) {
         _firestore.collection('ratings').add({
@@ -112,7 +112,7 @@ class _NavDrawerState extends State<NavDrawer> {
             onTap: () => {Navigator.of(context).pushNamed('/page1')},
           ),
           ListTile(
-            leading: Icon(Icons.verified_user),
+            leading: Icon(Icons.account_circle_rounded),
             title: Text(
               'Profile',
               style: TextStyle(
@@ -123,6 +123,19 @@ class _NavDrawerState extends State<NavDrawer> {
                   fontWeight: FontWeight.w600),
             ),
             onTap: () => {Navigator.of(context).pushNamed('/profile')},
+          ),
+          ListTile(
+            leading: Icon(Icons.verified_user),
+            title: Text(
+              'Partners',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontFamily: 'poppins',
+                  letterSpacing: 1,
+                  fontWeight: FontWeight.w600),
+            ),
+            onTap: () => {Navigator.of(context).pushNamed('/partners')},
           ),
           ListTile(
             leading: Icon(Icons.border_color),

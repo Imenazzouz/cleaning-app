@@ -61,17 +61,7 @@ class _LocationState extends State<Location> {
               color: Colors.white),
         ),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // do something
-            },
-          )
-        ],
+        actions: <Widget>[],
         backgroundColor: Colors.blueAccent,
         elevation: 0.0,
       ),

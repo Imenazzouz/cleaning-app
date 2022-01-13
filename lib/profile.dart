@@ -1,281 +1,230 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:myapp/Services.dart';
+import 'dart:io';
+import 'package:path/path.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class ButtonWidget extends StatelessWidget {
-  final String text;
-  final VoidCallback onClicked;
+final _auth = FirebaseAuth.instance;
 
-  const ButtonWidget({
-    Key? key,
-    required this.text,
-    required this.onClicked,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => ElevatedButton(
-    style: ElevatedButton.styleFrom(
-      primary: Colors.blueAccent,
-      textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-      shape: const StadiumBorder(),
-      onPrimary: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-    ),
-    child: Text(text),
-    onPressed: onClicked,
-  );
-}
-
-class NumbersWidget extends StatelessWidget {
-  const NumbersWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: <Widget>[
-      buildButton(context, '5', 'Services'),
-      buildDivider(),
-      buildButton(context, '10', 'Following'),
-      buildDivider(),
-      buildButton(context, '150', 'Points'),
-    ],
-  );
-  Widget buildDivider() => const SizedBox(
-    height: 24,
-    child: VerticalDivider(),
-  );
-
-  Widget buildButton(BuildContext context, String value, String text) =>
-      MaterialButton(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        onPressed: () {},
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              value,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              text,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      );
-}
-
-class ProfileWidget extends StatelessWidget {
-  final String imagePath;
-  final VoidCallback onClicked;
-
-  const ProfileWidget({
-    Key? key,
-    required this.imagePath,
-    required this.onClicked,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.primary;
-
-    return Center(
-      child: Stack(
-        children: [
-          buildImage(),
-          Positioned(
-            bottom: 0,
-            right: 4,
-            child: buildEditIcon(color),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildImage() {
-    final image = NetworkImage(imagePath);
-
-    return ClipOval(
-      child: Material(
-        color: Colors.transparent,
-        child: Ink.image(
-          image: image,
-          fit: BoxFit.cover,
-          width: 128,
-          height: 128,
-          child: InkWell(onTap: onClicked),
-        ),
-      ),
-    );
-  }
-
-  Widget buildEditIcon(Color color) => buildCircle(
-    color: Colors.white,
-    all: 3,
-    child: buildCircle(
-      color: color,
-      all: 8,
-      child: const Icon(
-        Icons.edit,
-        color: Colors.white,
-        size: 20,
-      ),
-    ),
-  );
-
-  Widget buildCircle({
-    required Widget child,
-    required double all,
-    required Color color,
-  }) =>
-      ClipOval(
-        child: Container(
-          padding: EdgeInsets.all(all),
-          color: color,
-          child: child,
-        ),
-      );
-}
-
-class User {
-  final String imagePath;
-  final String name;
-  final String email;
-  final String about;
-  final bool isDarkMode;
-
-  const User({
-    required this.imagePath,
-    required this.name,
-    required this.email,
-    required this.about,
-    required this.isDarkMode,
-  });
-}
-
-AppBar buildAppBar(BuildContext context) {
-  final icon = CupertinoIcons.moon_stars;
-
-  return AppBar(
-    leading: const BackButton(),
-    backgroundColor: Colors.transparent,
-    elevation: 0,
-    actions: [
-      IconButton(
-        icon: Icon(icon),
-        onPressed: () {},
-      ),
-    ],
-  );
-}
-
-class UserPreferences {
-  static const myUser = User(
-    imagePath:
-    'https://scontent.ftun16-1.fna.fbcdn.net/v/t1.6435-9/64580623_1589802191151097_8349125233231265792_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=9Ur2hidDrp0AX9yK2kB&_nc_ht=scontent.ftun16-1.fna&oh=844f750920af9bf784a81e77ce1f0d79&oe=61CF8B17',
-    name: 'Yesmine Gharbi',
-    email: 'Yesmine.Gharbi@supcom.tn',
-    about: '2nd year ICT engineering student.',
-    isDarkMode: false,
-  );
-}
+final _firestore = FirebaseFirestore.instance;
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
-
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  File? _image;
+  var photLink;
+
   @override
   Widget build(BuildContext context) {
-    final user = UserPreferences.myUser;
+    Future getImage() async {
+      var selectedimage =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
+      var image = File(selectedimage!.path);
+
+      setState(() {
+        _image = image;
+        print('Image Path $_image');
+      });
+    }
+
+    Future uploadPic(BuildContext context) async {
+      String fileName = basename(_image!.path);
+      Reference firebaseStorageRef =
+          FirebaseStorage.instance.ref().child(fileName);
+      UploadTask uploadTask = firebaseStorageRef.putFile(_image!);
+      TaskSnapshot taskSnapshot = await uploadTask;
+      photLink = await taskSnapshot.ref.getDownloadURL();
+
+      setState(() {
+        print("Profile Picture uploaded");
+        Scaffold.of(context)
+            .showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+        _auth.currentUser!.updatePhotoURL(photLink);
+      });
+    }
 
     return Scaffold(
-      backgroundColor: Colors.blueAccent,
-      appBar: buildAppBar(context),
-      body: Container(
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40.0),
-              topRight: Radius.circular(40.0),
-            )),
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            const SizedBox(height: 18),
-            ProfileWidget(
-              imagePath: user.imagePath,
-              onClicked: () async {},
-            ),
-            const SizedBox(height: 24),
-            buildName(user),
-            const SizedBox(height: 24),
-            Center(child: buildUpgradeButton()),
-            const SizedBox(height: 24),
-            const NumbersWidget(),
-            const SizedBox(height: 40),
-            buildAbout(user),
-          ],
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/page1');
+          },
+        ),
+        title: Text('Clean Master'),
+        centerTitle: true,
+      ),
+      body: Builder(
+        builder: (context) => Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Center(
+                    child: CircleAvatar(
+                      radius: 100,
+                      backgroundColor: Colors.blueAccent,
+                      child: ClipOval(
+                        child: new SizedBox(
+                          width: 180.0,
+                          height: 180.0,
+                          child: (_auth.currentUser!.photoURL != null)
+                              ? Image.network(
+                                  _auth.currentUser!.photoURL.toString() ?? '',
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.network(
+                                  "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+                                  fit: BoxFit.fill,
+                                ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 60.0),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.camera,
+                        size: 30.0,
+                      ),
+                      onPressed: () {
+                        getImage();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      child: Column(
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('Username',
+                                style: TextStyle(
+                                    color: Colors.blueGrey, fontSize: 18.0)),
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('${loggedInUser.displayName}',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      child: Icon(
+                        Icons.edit,
+                        color: Color(0xff476cfb),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      child: Column(
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('Email',
+                                style: TextStyle(
+                                    color: Colors.blueGrey, fontSize: 18.0)),
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text('${loggedInUser.email}',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      child: Icon(
+                        Icons.edit,
+                        color: Color(0xff476cfb),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  RaisedButton(
+                    color: Color(0xff476cfb),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/page1');
+                    },
+                    elevation: 4.0,
+                    splashColor: Colors.blueGrey,
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.white, fontSize: 16.0),
+                    ),
+                  ),
+                  RaisedButton(
+                    color: Color(0xff476cfb),
+                    onPressed: () {
+                      uploadPic(context);
+                    },
+                    elevation: 4.0,
+                    splashColor: Colors.blueGrey,
+                    child: Text(
+                      'Submit',
+                      style: TextStyle(color: Colors.white, fontSize: 16.0),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
   }
-
-  Widget buildName(User user) => Column(
-    children: [
-      Text(
-        user.name,
-        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-      ),
-      const SizedBox(height: 4),
-      Text(
-        user.email,
-        style: const TextStyle(color: Colors.grey),
-      )
-    ],
-  );
-
-  Widget buildUpgradeButton() => ButtonWidget(
-    text: 'Disconnect now',
-    onClicked: () {},
-  );
-
-  Widget buildAbout(User user) => Container(
-    decoration: const BoxDecoration(
-        color: Colors.blueAccent,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
-          bottomLeft: Radius.circular(20.0),
-          bottomRight: Radius.circular(20.0),
-        )),
-    margin: EdgeInsets.all(48),
-    padding: const EdgeInsets.symmetric(horizontal: 58),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 15),
-        const Text(
-          'About:',
-          style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Colors.white),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          user.about,
-          style: const TextStyle(fontSize: 15),
-        ),
-        const SizedBox(height: 15)
-      ],
-    ),
-  );
 }

@@ -33,6 +33,7 @@ dependencies:
   carousel_slider: ^4.0.0
   firebase_auth: ^3.3.0
   firebase_core: ^1.10.2
+  firebase_storage: ^10.2.5
   flutter_pw_validator: ^1.2.1
   cloud_firestore: ^3.1.4
   modal_progress_hud_nsn: ^0.1.0-nullsafety-0
@@ -41,6 +42,9 @@ dependencies:
   rating_dialog: ^2.0.3
   in_app_review: ^2.0.3
   flutter_svg: ^1.0.1
+  image_picker: ^0.8.4+4
+  animated_theme_switcher: ^2.0.6
+
 
 
 

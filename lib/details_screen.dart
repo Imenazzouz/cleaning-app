@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/Services.dart';
 import 'constants.dart';
 import 'dart:math';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:myapp/Location.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final _firestore = FirebaseFirestore.instance;
 
 class TitleAndPrice extends StatelessWidget {
   const TitleAndPrice({
@@ -26,10 +29,10 @@ class TitleAndPrice extends StatelessWidget {
               children: [
                 TextSpan(
                   text: "$title\n",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4!
-                      .copyWith(color: kTextColor, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.headline4!.copyWith(
+                      color: kTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
                 ),
                 TextSpan(
                   text: country,
@@ -43,7 +46,6 @@ class TitleAndPrice extends StatelessWidget {
             ),
           ),
           Spacer(),
-          
         ],
       ),
     );
@@ -104,7 +106,14 @@ class _RatingViewState extends State<RatingView> {
                     fontSize: 17,
                   ),
                 ),
-                onPressed: _hideDialog,
+                onPressed: () {
+                  Navigator.pop(context);
+                  _firestore.collection('company ratings').add({
+                    'uid': loggedInUser.uid,
+                    'rating': '${_rating}',
+                    'what could be better': '${screens[_selectedchipindex]}'
+                  });
+                },
               ),
             ),
           ),
@@ -161,7 +170,6 @@ class _RatingViewState extends State<RatingView> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
-
       children: [
         SizedBox(height: 15),
         Text(
@@ -186,7 +194,15 @@ class _RatingViewState extends State<RatingView> {
       ],
     );
   }
-final screens = ["services","Staff", "Products","Rapidity","safety","punctuality"];
+
+  final screens = [
+    "services",
+    "Staff",
+    "Products",
+    "Rapidity",
+    "safety",
+    "punctuality"
+  ];
   _causeOfRating() {
     return Stack(
       alignment: Alignment.center,
@@ -292,9 +308,7 @@ class IconCard extends StatelessWidget {
 }
 
 class ImageAndIcons extends StatelessWidget {
-  
-
-   const ImageAndIcons({
+  const ImageAndIcons({
     Key? key,
     required this.image,
     required this.size,
@@ -310,10 +324,9 @@ class ImageAndIcons extends StatelessWidget {
         height: size.height * 0.8,
         child: Row(
           children: <Widget>[
-            
             Container(
               height: 420,
-              width: 410 ,
+              width: 410,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(70),
@@ -326,7 +339,6 @@ class ImageAndIcons extends StatelessWidget {
                     color: Colors.blueAccent.withOpacity(0.2),
                   ),
                 ],
-                
                 image: DecorationImage(
                   alignment: Alignment.center,
                   image: AssetImage(image),
@@ -341,36 +353,36 @@ class ImageAndIcons extends StatelessWidget {
 }
 
 class Body extends StatelessWidget {
-  
-   const Body({
+  const Body({
     Key? key,
     this.title = '',
     this.country = '',
     required this.imagee,
     this.price = 0,
   }) : super(key: key);
-final String title, country, imagee;
-  final int price;  @override
+  final String title, country, imagee;
+  final int price;
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
           ImageAndIcons(
-            image: '$imagee' ,
+            image: '$imagee',
             size: size / 1.4,
             key: null,
           ),
           TitleAndPrice(
             title: "$title",
-            price:price,
+            price: price,
             key: null,
           ),
           SizedBox(height: kDefaultPadding),
           Row(
             children: <Widget>[
               SizedBox(
-                width: size.width/2,
+                width: size.width / 2,
                 height: 95,
                 // ignore: deprecated_member_use
                 child: FlatButton(
@@ -381,12 +393,9 @@ final String title, country, imagee;
                     ),
                   ),
                   color: Colors.blueAccent,
-                  onPressed: () {Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Location(),
-                ),);
-                },
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/location');
+                  },
                   child: Text(
                     "Reserve",
                     style: TextStyle(
@@ -430,41 +439,34 @@ OpenRatingDialog(BuildContext context) {
 }
 
 class DetailsScreen extends StatelessWidget {
-  
-   const DetailsScreen({
+  const DetailsScreen({
     Key? key,
     this.title = '',
-        required this.image,
-
+    required this.image,
     this.country = '',
     this.price = 0,
   }) : super(key: key);
-  final String title, country,image;
+  final String title, country, image;
   final int price;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: Body(title:"$title\n", imagee: "$image",key: null,price: price,),
+      body: Body(
+        title: "$title\n",
+        imagee: "$image",
+        key: null,
+        price: price,
+      ),
     );
   }
 
   AppBar buildAppBar() {
     return AppBar(
-      leading: const BackButton(
-        color: Colors.white,
-      ),
+      automaticallyImplyLeading: false,
       title: const Text(' '),
       centerTitle: true,
-      actions: <Widget>[
-        IconButton(
-          icon: const Icon(
-            Icons.settings,
-            color: Colors.white,
-          ),
-          onPressed: () {},
-        )
-      ],
+      actions: <Widget>[],
       backgroundColor: Colors.blueAccent,
       elevation: 0.0,
     );

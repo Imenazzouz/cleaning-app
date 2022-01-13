@@ -99,7 +99,7 @@ class _SignUpState extends State<SignUp> {
                           controller: _usernameController,
                           keyboardType: TextInputType.text,
                           decoration: const InputDecoration(
-                            hintText: "   Amouna ta7founa",
+                            hintText: "Type your username",
                             border: InputBorder.none,
                           ),
                         ),
@@ -140,7 +140,7 @@ class _SignUpState extends State<SignUp> {
                           controller: emailcontroller,
                           keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
-                            hintText: "   salah@gmail.com",
+                            hintText: "   yourname@gmail.com",
                             border: InputBorder.none,
                           ),
                         ),
@@ -286,7 +286,8 @@ class _SignUpState extends State<SignUp> {
                                 AuthenticationHelper()
                                     .signUp(
                                         email: emailcontroller.text,
-                                        password: passwordcontroller.text)
+                                        password: passwordcontroller.text,
+                                        username: _usernameController.text)
                                     .then((result) {
                                   if (result == null) {
                                     Navigator.pushReplacement(

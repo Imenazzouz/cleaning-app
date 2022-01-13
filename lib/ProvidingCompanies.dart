@@ -54,17 +54,7 @@ class _ChooseCompanyState extends State<ChooseCompany> {
               color: Colors.white),
         ),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // do something
-            },
-          )
-        ],
+        actions: <Widget>[],
         backgroundColor: Colors.blueAccent,
         elevation: 0.0,
       ),

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:myapp/History.dart';
 import 'package:myapp/Services.dart';
 import 'constants.dart';
@@ -141,50 +142,68 @@ class _HistoryStreamState extends State<HistoryStream> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final reservations = snapshot.data!.docs;
-            List<RecomendCard> reservedItems = [];
+            int i = 0;
+            List<Column> reservedItems = [];
             for (var reservation in reservations) {
               if ((reservation.get('payed') == true) &
                   (reservation.get('uid') == loggedInUser.uid)) {
                 final reservationCompany = reservation.get('company');
                 final reservationImage = reservation.get('companyImage');
-                
-                final historyItem = RecomendCard(
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailsScreen(title:reservationCompany,image: reservationImage,key: null),
-                      ),
-                    );
-                  },
-                  title: reservationCompany,
-                  image: reservationImage,
-                );
-                print(historyItem.title);
-                reservedItems.add(historyItem);
-                continue;
-              }
+                final reservationDate = reservation.get('date');
+                final reservationDestination = reservation.get('serviceTo');
 
-              return SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: reservedItems.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                            child: reservedItems[index],
-                            width: MediaQuery.of(context).size.width * 0.7);
-                      }),
-                ),
-              );
+                final historyItem = Column(children: [
+                  RecomendCard(
+                    press: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsScreen(
+                              title: reservationCompany,
+                              image: reservationImage,
+                              key: null),
+                        ),
+                      );
+                    },
+                    title: reservationCompany,
+                    image: reservationImage,
+                  ),
+                  Text(
+                    'Service provided the:  ${reservationDate.toString().substring(0, 10)}',
+                    style: TextStyle(
+                        fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    'Service destined to:  ${reservationDestination}',
+                    style: TextStyle(
+                        fontFamily: 'Poppins', fontWeight: FontWeight.w600),
+                  )
+                ]);
+                reservedItems.add(historyItem);
+              }
             }
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                height: MediaQuery.of(context).size.height * 0.55,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: reservedItems.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                          child: reservedItems[index],
+                          width: MediaQuery.of(context).size.width * 0.7);
+                    }),
+              ),
+            );
           }
-          return Text('no reservations done');
+
+          return Text(
+            'no reservations done',
+            style: TextStyle(fontFamily: 'Poppins'),
+          );
         });
   }
 }
@@ -204,16 +223,16 @@ class RecomendCard extends StatelessWidget {
       margin: EdgeInsets.only(
         left: kDefaultPadding,
         top: kDefaultPadding / 2,
-        bottom: kDefaultPadding ,
+        bottom: kDefaultPadding,
       ),
-      width: size.width ,
-      height: size.height * 0.3,
+      width: size.width,
+      height: size.height * 0.2,
       child: Column(
         children: <Widget>[
           Image.asset(
             image,
             width: size.width * 0.6,
-            height: size.height * 0.2,
+            height: size.height * 0.1,
           ),
           GestureDetector(
             onTap: press,
@@ -439,9 +458,7 @@ class HomeScreen extends StatelessWidget {
 
   AppBar buildAppBar() {
     return AppBar(
-      leading: const BackButton(
-        color: Colors.white,
-      ),
+      automaticallyImplyLeading: false,
       title: const Text(' '),
       centerTitle: true,
       actions: <Widget>[

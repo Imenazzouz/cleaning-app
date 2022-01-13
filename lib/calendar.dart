@@ -30,6 +30,7 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
               leading: BackButton(
@@ -48,15 +49,7 @@ class _CalendarState extends State<Calendar> {
                     color: Colors.white),
               ),
               centerTitle: true,
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {},
-                )
-              ],
+              actions: <Widget>[],
               backgroundColor: Colors.blueAccent,
               elevation: 0.0,
             ),
